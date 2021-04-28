@@ -236,7 +236,7 @@
 			  // { id: 'refund', name: '退换/售后', icon: 'shouhou', type: 'link', url: 'pages/refund/index' },
 			  // { id: 'refund', name: '夺宝订单', icon: 'fuwu', type: 'link', url: 'pages/refund/index' },
         { id: 'refund', name: '绑定手机', icon: 'dianhua', type: 'link', url: 'packageA/pages/with/with' },
-		{ id: 'poin', name: '商家入驻', icon: 'dianpu', type: 'link', url: 'packageA/pages/shopform/shopform' },
+		// { id: 'poin', name: '商家入驻', icon: 'dianpu', type: 'link', url: 'packageA/pages/shopform/shopform' },
         { id: 'help', name: '商家二维码', icon: 'erweima', type: 'link', url: 'packageA/pages/share/share?shop=shop'},
         { id: 'poin', name: '商家提现明细', icon: 'zhangben', type: 'link', url: 'packageA/pages/log/log?log=shop'},
         { id: 'poin', name: '商家流水', icon: 'zhangben', type: 'link', url: 'packageA/pages/log/log?log=shops'},

@@ -13,7 +13,7 @@
           <text class="floor-price__samll" v-if="goods.pay_type==2 || goods.pay_type==3">{{goods.pay_type==3?'+':''}}￥</text>
           <text class="floor-price" v-if="goods.pay_type==2 || goods.pay_type==3">{{ goods.goods_price_min }}</text>
           <!-- 划线价 -->
-          <text class="original-price" >￥{{ goods.line_price_min }}</text>
+          <text class="original-price"v-if="goods.pay_type!=1" >￥{{ goods.line_price_min }}</text>
         </view>
         <view class="block-right dis-flex">
           <!-- 销量 -->
