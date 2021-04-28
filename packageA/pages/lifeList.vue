@@ -152,9 +152,21 @@
 			}
 		},
 		onUnload(){
-			uni.navigateBack({
-				delta:1
-			})
+			// uni.navigateBack({
+			// 	delta:1,
+			// })
+			// uni.redirectTo({ url: '/pages/custom/index?pageId=10002' })
+		},
+		onBackPress({from}){
+			
+			if(from=='navigateBack'){
+				return false
+			}else {
+				uni.navigateBack({
+					delta:1,
+				})
+			}
+			
 		},
 		onLoad(options) {
 			const app = this;

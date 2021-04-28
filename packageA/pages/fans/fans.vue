@@ -36,11 +36,11 @@
 					return new Promise((resolve, reject) => {
 					  UserApi.userFans({page:this.page})
 						.then(result => {
-							this.isMore = result.data.list.current_page == result.data.list.current_page?false:true;
+							this.isMore = result.data.list.current_page == result.data.list.last_page?false:true;
 							
-							this.fansList = this.fansList.concat(result.data.list.data.data);
-							this.total = result.data.list.data.total;
-							this.allcount = result.data.list.all_count
+							this.fansList = this.fansList.concat(result.data.list.data);
+							this.total = result.data.list.total;
+							this.allcount = result.data.list.query
 						  resolve(result.data)
 						})
 						.catch(err => {

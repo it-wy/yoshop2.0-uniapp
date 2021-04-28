@@ -26,6 +26,9 @@
 				<p>2. 您可以通过系统生成的二维码图片通过<text>微信</text>分享给您的好友。</p>
 				<p>3. 您可以转发本页面通过<text>微信</text>分享给您的好友。</p>
 				<p>4. 每个二维码信息都不同，请使用您自己生成的二维码图片进行传播。</p>
+				<!-- #ifdef APP-PLUS -->
+				<u-button type="primary" @click="onshare()">点击分享微信</u-button>
+				<!-- #endif -->
 			</view>
 
 			<view class="desc" v-else>
@@ -135,6 +138,25 @@
 			      })
 			  })		
 			},
+			// app分享
+			onshare(){
+				uni.share({
+					provider: 'weixin',
+					scene: "WXSceneSession",
+					type: 5,
+					imageUrl: 'https://bjetxgzv.cdn.bspapp.com/VKCEYUGU-uni-app-doc/962fc340-4f2c-11eb-bdc1-8bd33eb6adaa.png',
+					title: '旅享生活',
+					miniProgram: {
+						id: 'gh_6790f13273c8',
+						path: 'pages/index/index',
+						type: 0,
+						webUrl: 'http://uniapp.dcloud.io'
+					},
+					success: ret => {
+						console.log(JSON.stringify(ret));
+					}
+				});
+			}
 			
 		},
 		 onShareAppMessage(res) {

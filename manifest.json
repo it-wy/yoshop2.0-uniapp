@@ -20,7 +20,8 @@
         "modules" : {
             "iBeacon" : {},
             "OAuth" : {},
-            "Payment" : {}
+            "Payment" : {},
+            "Share" : {}
         },
         /* 应用发布信息 */
         "distribute" : {
@@ -74,6 +75,12 @@
                         "UniversalLinks" : ""
                     },
                     "appleiap" : {}
+                },
+                "share" : {
+                    "weixin" : {
+                        "appid" : "wx31e8e3d24057f8ef",
+                        "UniversalLinks" : ""
+                    }
                 }
             },
             "splashscreen" : {

@@ -119,7 +119,7 @@
 	
 	<!-- 备案 -->
 	<view class="ba">
-		<p>闽ICP备20008662号-1</p>
+		<p><image src="http://pic.tralife.cn/10001/20210427/20baeb551865e8d6eab32ac6d333c696.png" mode="widthFix"></image>闽ICP备20008662号-1</p>
 	</view>
 	
 
@@ -875,6 +875,13 @@
 	  p {
 		  text-align: center;
 		  color: #858687;
+		  display: flex;
+		  align-items: center;
+		  justify-content: center;
+		  image {
+			  width: 30rpx;
+			  margin-right: 10rpx;
+		  }
 	  }
   }
 </style>

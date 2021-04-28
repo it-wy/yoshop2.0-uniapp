@@ -1,5 +1,5 @@
 <template>
-  <view class=""> 正在开发中 </view>
+  <view class=""> 正在开发 </view>
 </template>
 
 <script>
