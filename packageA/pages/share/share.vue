@@ -27,7 +27,7 @@
 				<p>3. 您可以转发本页面通过<text>微信</text>分享给您的好友。</p>
 				<p>4. 每个二维码信息都不同，请使用您自己生成的二维码图片进行传播。</p>
 				<!-- #ifdef APP-PLUS -->
-				<u-button type="primary" @click="onshare()">点击分享微信</u-button>
+				<u-button type="primary" open-type="launchApp" @click="onshare()">点击分享微信</u-button>
 				<!-- #endif -->
 			</view>
 
@@ -51,6 +51,7 @@
 				uid: store.getters.userId,
 				qrcode: '',
 				avatar: '',
+				sweixin: null,
 				// 分享
 				share:{
 					title:'快来加入旅享生活',
@@ -148,7 +149,7 @@
 					title: '旅享生活',
 					miniProgram: {
 						id: 'gh_6790f13273c8',
-						path: 'pages/index/index',
+						path: 'pages/index/index?scene='+store.getters.userId',
 						type: 0,
 						webUrl: 'http://uniapp.dcloud.io'
 					},
@@ -156,6 +157,18 @@
 						console.log(JSON.stringify(ret));
 					}
 				});
+				
+				
+				// plus.share.getServices((e)=>{
+				// 	this.sweixin = e[2];
+				// 	this.sweixin?this.sweixin.launchMiniProgram({
+				// 	id:'gh_6790f13273c8'
+				// }):plus.nativeUI.alert('当前环境不支持微信操作!');
+					
+				// });
+						
+				
+				
 			}
 			
 		},

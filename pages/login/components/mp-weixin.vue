@@ -14,7 +14,11 @@
       <!-- <button class="button btn-normal" open-type="getUserInfo" lang="zh_CN" @getuserinfo="getUserInfo">授权登录</button> -->
       <!-- 获取微信用户信息（新版） -->
 	  <!-- #ifdef H5 || MP-WEIXIN -->
-	  <button class="button btn-normal" @click.stop="getUserProfile">授权登录</button>
+	  <button class="button btn-normal"   @click.stop="getUserProfile">授权登录</button>
+    <!-- v-show="!isphone" -->
+    <!-- <button class="button btn-normal btop" v-show="isphone" open-type="getPhoneNumber" @getphonenumber="getphonenumber">获取手机号</button> -->
+    
+    
 	  <!-- #endif -->
       
 	  
@@ -35,7 +39,8 @@
       return {
         // 微信小程序登录凭证 (code)
         // 提交到后端，用于换取openid
-        code: ''
+        code: '',
+        isphone: true, //是否显示手机号登录
       }
     },
 
@@ -61,7 +66,10 @@
         })
       },
 	  
-	  
+      getphonenumber(e){
+        console.log(e.detail);
+        this.isphone = false
+      },
 	  
 	  
 	  
@@ -230,6 +238,9 @@
       font-size: 30rpx;
       border-radius: 999rpx;
       text-align: center;
+    }
+    .btop{
+      
     }
   }
 

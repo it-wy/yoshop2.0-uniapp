@@ -63,22 +63,22 @@
                 "ad" : {},
                 "oauth" : {
                     "weixin" : {
-                        "appid" : "wx31e8e3d24057f8ef",
-                        "appsecret" : "fea8483fd9aa58c9b98d0d20bf499cc2",
+                        "appid" : "wxf045fd10aa00e07e",
+                        "appsecret" : "14b0dcdf462f1f109521f839514c82c9",
                         "UniversalLinks" : ""
                     }
                 },
                 "payment" : {
                     "weixin" : {
                         "__platform__" : [ "ios", "android" ],
-                        "appid" : "wx31e8e3d24057f8ef",
+                        "appid" : "wxf045fd10aa00e07e",
                         "UniversalLinks" : ""
                     },
                     "appleiap" : {}
                 },
                 "share" : {
                     "weixin" : {
-                        "appid" : "wx31e8e3d24057f8ef",
+                        "appid" : "wxf045fd10aa00e07e",
                         "UniversalLinks" : ""
                     }
                 }

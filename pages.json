@@ -201,7 +201,7 @@
 				"style" :                                                                                    
 				{
 					"navigationBarTitleText": "本地生活",
-					"enablePullDownRefresh": true
+					"enablePullDownRefresh": false
 				}
 			        
 			},{

@@ -6,7 +6,7 @@
 			    :clearable="false"
 			    :showItemNum="5" 
 			    :listShow="false"
-			    :isCanInput="true"  
+			    :isCanInput="false"  
 			    :style_Container="'height: 40px; font-size: 16px;'"
 			    :placeholder = "'请查找'"
 			    :initValue="initValue"

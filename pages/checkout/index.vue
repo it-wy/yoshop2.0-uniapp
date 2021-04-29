@@ -60,7 +60,9 @@
       </view>
       <view class="flow-num-box b-f">
         <text>共{{ order.orderTotalNum }}件商品，合计：</text>
-        <text class="flow-money col-m">{{order.goodsList[0].pay_type==1 || order.goodsList[0].pay_type==3 ?'积分'+(Number(order.goodsList[0].goods_point_min)*100*order.goodsList[0].total_num)/100:''}}  {{order.goodsList[0].pay_type==2 || order.goodsList[0].pay_type== 3? '￥'+ (order.goodsList[0].goods_price*100*order.goodsList[0].total_num)/100:'' }}</text>
+        <text class="flow-money col-m" v-if="order.goodsList[0].pay_type!=1">{{order.orderTotalPrice}} {{order.goodsList[0].pay_type==3?'积分'+order.orderTotalPoint:''}}</text>
+          <text class="flow-money col-m" v-else>{{'积分'+order.orderTotalPoint}}</text>
+        <!-- <text class="flow-money col-m">{{order.goodsList[0].pay_type==1 || order.goodsList[0].pay_type==3 ?'积分'+(Number(order.goodsList[0].goods_point_min)*100*order.goodsList[0].total_num)/100:''}}  {{order.goodsList[0].pay_type==2 || order.goodsList[0].pay_type== 3? '￥'+ (order.goodsList[0].goods_price*100*order.goodsList[0].total_num)/100:'' }}</text> -->
       </view>
     </view>
 
@@ -69,7 +71,9 @@
       <view class="flow-all-list dis-flex">
         <text class="flex-five">订单总金额：</text>
         <view class="flex-five t-r">
-          <text class="col-m">{{order.goodsList[0].pay_type==1 || order.goodsList[0].pay_type==3 ?'积分'+(Number(order.goodsList[0].goods_point_min)*100*order.goodsList[0].total_num)/100:''}} {{order.goodsList[0].pay_type==2 || order.goodsList[0].pay_type== 3? '￥'+ (order.goodsList[0].goods_price*100*order.goodsList[0].total_num)/100:'' }}</text>
+          <text class="col-m" v-if="order.goodsList[0].pay_type!=1">{{order.orderTotalPrice}} {{order.goodsList[0].pay_type==3?'积分'+order.orderTotalPoint:''}}</text>
+          <text class="col-m" v-else>{{'积分'+order.orderTotalPoint}}</text>
+          <!-- <text class="col-m">{{order.goodsList[0].pay_type==1 || order.goodsList[0].pay_type==3 ?'积分'+(Number(order.goodsList[0].goods_point_min)*100*order.goodsList[0].total_num)/100:''}} {{order.goodsList[0].pay_type==2 || order.goodsList[0].pay_type== 3? '￥'+ (order.goodsList[0].goods_price*100*order.goodsList[0].total_num)/100:'' }}</text> -->
         </view>
       </view>
       <!-- 优惠券 -->

@@ -12,7 +12,7 @@
     <!-- 表单 -->
     <view class="login-form">
       <!-- 手机号 -->
-      <view class="form-item">
+      <view class="form-item" v-show="!isapplogin">
         <input
           class="form-item--input"
           type="number"
@@ -22,7 +22,7 @@
         />
       </view>
       <!-- 图形验证码 -->
-      <view class="form-item">
+      <view class="form-item" v-show="!isapplogin">
         <input
           class="form-item--input"
           type="text"
@@ -37,7 +37,7 @@
         </view>
       </view>
       <!-- 短信验证码 -->
-      <view class="form-item">
+      <view class="form-item" v-show="!isapplogin">
         <input
           class="form-item--input"
           type="number"
@@ -53,11 +53,11 @@
         </view>
       </view>
       <!-- 登录按钮 -->
-      <view class="login-button" @click="handleLogin">
+      <view class="login-button" v-show="!isapplogin" @click="handleLogin">
         <text>登录</text>
       </view>
       <!-- #ifdef APP-PLUS -->
-      <view class="login-button greens" @click="handleThirdLoginApp">
+      <view class="login-button greens" v-show="!isapplogin" @click="handleThirdLoginApp">
         <text>微信登录</text>
       </view>
       <!-- #endif -->
@@ -107,6 +107,7 @@ export default {
       captchaCode: "",
       // 短信验证码
       smsCode: "",
+      isapplogin:false, // 是否显示app微信登录
     };
   },
 
@@ -227,7 +228,8 @@ export default {
     handleLogin() {
       const app = this;
       if (!app.isLoading && app.formValidation(SUBMIT_LOGIN)) {
-        app.submitLogin();
+        app.submitLogin()
+        
       }
     },
 
@@ -244,11 +246,13 @@ export default {
         })
         .then((result) => {
           // 显示登录成功
-          app.$toast(result.message);
+          console.log(JSON.stringify(result));
           // 跳转回原页面
-          setTimeout(() => {
-            app.onNavigateBack(1);
-          }, 2000);
+          // setTimeout(() => {
+          //   app.onNavigateBack(1);
+          // }, 2000);
+          app.isapplogin = true;
+          app.$toast('请点击微信登录');
         })
         .finally(() => (app.isLoading = false));
     },
@@ -334,6 +338,7 @@ export default {
           .then(result => {
             // 显示登录成功
             app.$toast(result.message)
+            app.submitLogin();
             // 跳转回原页面
             setTimeout(() => {
               app.onNavigateBack(1)
@@ -341,7 +346,7 @@ export default {
           })
           .catch(() => {
             // 一步登录
-            app.submitLogin(userInfo)
+            // app.submitLogin(userInfo)
 			
           })
       },

@@ -2,9 +2,9 @@ import request from '@/utils/request'
 
 // api地址
 const api = {
-  login: 'passport/login',
+  login: 'passport/phone',
   mpWxLogin: 'passport/mpWxLogin',
-  appWxLogin:'',
+  appWxLogin:'passport/mpAppLogin',
   captcha: 'passport/captcha',
   sendSmsCaptcha: 'passport/sendSmsCaptcha'
 }

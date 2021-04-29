@@ -47,7 +47,7 @@ const user = {
         LoginApi.login({ form: data })
           .then(response => {
             const result = response.data
-            loginSuccess(commit, result)
+            // loginSuccess(commit, result)
             resolve(response)
           })
           .catch(reject)
@@ -70,6 +70,7 @@ const user = {
     // app微信快捷登录
     AppWxLogin({ commit }, data) {
       return new Promise((resolve, reject) => {
+        
         LoginApi.appWxLogin({ form: data })
           .then(response => {
             const result = response.data
