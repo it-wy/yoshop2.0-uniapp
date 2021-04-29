@@ -137,14 +137,21 @@
 	  
 	  // 跳转余额转账页面
 	  ontransfer(){
-		 uni.navigateTo({
-		 	url:'/packageA/pages/with/with?type='+'balance'
-		 }) 
+     if(this.userInfo.mobile==''){
+        
+        this.content = '余额转账前请绑定手机'
+			  this.show = true;
+
+		  } else {
+        uni.navigateTo({
+          url:'/packageA/pages/with/with?type='+'balance'
+        })
+      } 
 		},
 		
 		// 确认弹出框
 		confirm(){
-      if(this.content == '提现前请绑定手机'){
+      if(this.content == '提现前请绑定手机' || this.content == '余额转账前请绑定手机'){
         uni.navigateTo({
                   url:'/packageA/pages/with/with?type='+'phone'
           })

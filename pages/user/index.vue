@@ -23,8 +23,9 @@
           <!-- 会员无等级时显示手机号 -->
           <view v-else class="mobile">{{ userInfo.mobile }}{{userInfo.user_id?'(UID:'+userInfo.user_id+')':''}}</view>
           <!-- 城市达人 -->
-          <view>
-            <u-tag :text="vip" border-color="#c59a46" color="white" bg-color="#ff5722e0"  mode="dack" />
+          <view class="user_vip">
+            <!-- <u-tag :text="vip" border-color="#c59a46" color="white" bg-color="#ff5722e0"  mode="dack" /> -->
+            <view class="vip">{{vip}}</view>
             &nbsp;{{userInfo.shop_id_arr.length>0?'[商家]':''}}
           </view>
           
@@ -119,7 +120,8 @@
 	
 	<!-- 备案 -->
 	<view class="ba">
-		<p><image src="http://pic.tralife.cn/10001/20210427/20baeb551865e8d6eab32ac6d333c696.png" mode="widthFix"></image>闽ICP备20008662号-1</p>
+		<p><image src="http://pic.tralife.cn/10001/20210427/20baeb551865e8d6eab32ac6d333c696.png" mode=""></image>闽公网安备 35020302034438号</p>
+    <p>闽ICP备20008662号-1  </p>
 	</view>
 	
 
@@ -880,8 +882,26 @@
 		  justify-content: center;
 		  image {
 			  width: 30rpx;
+        height: 30rpx;
 			  margin-right: 10rpx;
 		  }
 	  }
   }
+
+  .user_vip{
+    display: flex;
+    .vip{
+        // border: 2rpx solid #c59a46;
+        background: #ff5622;
+        color: white;
+        border-radius: 4rpx;
+        font-size: 22rpx;
+        height: 46rpx;
+        padding: 8rpx 22rpx;
+        box-sizing: border-box;
+        display: flex;
+        align-items: center;
+      }
+  }
+  
 </style>

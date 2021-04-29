@@ -9,7 +9,7 @@
         @getMore="onShopForm"
       ></u-notice-bar>
     </view>
-    <view class="container" :class="{posic: top}" ref="tabbar">
+    <view class="container" :class="{posic: top,tabfixed:isfixed}" ref="tabbar">
       <view
         class="c-item"
         v-for="(item, i) in tabs"
@@ -162,11 +162,16 @@ export default {
     params: Object,
     dataList: Array,
     islife: Boolean,
+    isfixed: Boolean,
+    scrolltop: Number
   },
   methods: {
     // 点击切换
     onTab(i) {
       const app = this;
+      
+      
+
       app.idx = i;
       if (app.curRoutes == "pages/index/index" && i == 2) {
         app.idx = 0;
@@ -185,9 +190,7 @@ export default {
 
       app.form.page = 1;
       app.isMore = true;
-      if (app.islife) {
-        app.shoplist = [];
-      }
+     
 
       // 如果本地生活则执行
       if (app.islife) {
@@ -208,6 +211,8 @@ export default {
             break;
         }
         app.getShopList();
+
+        
       }
     },
     // 获取店铺
@@ -218,6 +223,9 @@ export default {
         return new Promise((resolve, reject) => {
           ShopApi.list(app.form)
             .then((result) => {
+               if (app.islife && app.form.page == 1) {
+                app.shoplist = [];
+              }
               app.isMore =
                 result.data.result.current_page == result.data.result.last_page
                   ? false
@@ -235,6 +243,8 @@ export default {
                   app.list.push(i.shop_name + "-加入成功");
                 });
               }
+
+              
 
               resolve(result.data);
             })
@@ -351,7 +361,12 @@ export default {
 
     
   },
-};
+    // 页面滚动
+  onPageScroll({ scrollTop }) {
+    console.log("----");
+    console.log(scrollTop);
+  }
+}  
 </script>
 
 <style lang="scss">
@@ -455,5 +470,20 @@ export default {
       padding-bottom: 20rpx;
     }
   }
+}
+
+.tabfixed {
+  position: sticky;
+  top: 0;
+  left: 0;
+  z-index: 99;
+   padding: 10rpx 20rpx 20rpx;
+   width: 100%;
+  color: white;
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 20rpx;
+  color: #fa2209;
+  background-color: #fff;
 }
 </style>

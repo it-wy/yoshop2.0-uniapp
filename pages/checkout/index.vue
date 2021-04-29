@@ -469,6 +469,7 @@
         // 按钮禁用
         app.disabled = true
         // 请求api
+        
         CheckoutApi.submit(app.options.mode, app.getFormData())
           .then(result => app.onSubmitCallback(result))
           .catch(err => {
@@ -488,6 +489,7 @@
         const app = this
         // 发起微信支付
         if (result.data.payType == PayTypeEnum.WECHAT.value) {
+          
           wxPayment(result.data.payment)
             .then(() => app.$success('支付成功'))
             .catch(err => app.$error('订单未支付'))

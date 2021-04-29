@@ -1,7 +1,7 @@
 <template>
   <view class="container">
     <!-- 店铺页面组件 -->
-    <Page :items="items" :islife="islife" />
+    <Page :items="items" :islife="islife" :isfixed="isfixed" :scrolltop="scrolltop" />
   </view>
 </template>
 
@@ -24,7 +24,11 @@
         // 页面元素
         items: [],
         // 是否本地生活
-        islife: false
+        islife: false,
+        // 是否固定
+        isfixed: false,
+        // 距离顶部
+        scrolltop: 0
       }
     },
 
@@ -191,7 +195,13 @@
 	//上拉
 	onReachBottom() {
 		uni.$emit('onReachBottom');
-	}
+	},
+   // 页面滚动
+  onPageScroll({ scrollTop }) {
+   
+    this.isfixed = scrollTop>393 ? true : false;
+    this.scrolltop = scrollTop;
+  }
 
   }
 </script>

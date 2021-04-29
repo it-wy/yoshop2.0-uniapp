@@ -15,7 +15,7 @@
       </block>
 	  <!-- tab分类 -->
 	  <block v-if="item.type === 'goods'">
-		<Tab :itemStyle="item.style" :params="item.params" :dataList="item.data" :islife="islife" />
+		<Tab :itemStyle="item.style" :params="item.params" :dataList="item.data" :islife="islife" :isfixed="isfixed" :scrolltop="scrolltop" />
 	  </block>
       <!-- 图片橱窗 -->
       <block v-if="item.type === 'window'">
@@ -112,7 +112,19 @@
 		  default (){
 			  return false
 		  }
-	  }
+	  },
+    isfixed: {
+		  type: Boolean,
+		  default (){
+			  return false
+		  }
+	  },
+    scrolltop:{
+      type: Number,
+      default () {
+        return 0
+      }
+    }
     },
 	
 	

@@ -58,7 +58,7 @@
 						
 						<text v-if="item.order_no">{{item.order_no}}</text>
 						<text v-if="item.transaction_id">{{item.transaction_id}}</text>
-						<text v-if="item.describe">{{item.describe}}</text>
+						<text v-if="item.describe">{{item.describe}}{{item.lid?'('+item.lid+')':''}}</text>
 						 <text v-if="item.remark">{{item.remark}}</text>
 						 <text v-if="item.card">{{item.bank_name+'('+item.card+')'}}</text>    
 						<text v-if="!isShopLog">{{item.money?item.money:item.amount?item.amount:item.scene}}</text>
@@ -449,7 +449,8 @@
 			}
 		},
 		onUnload() {
-			uni.switchTab({ url: '/pages/user/index' })
+			// 忘了什么原因
+			// uni.switchTab({ url: '/pages/user/index' })
 		}
 		
 	}

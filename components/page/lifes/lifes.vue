@@ -10,7 +10,7 @@
 					<p>{{item.shop_name}}</p>
 					<p>营业时间  {{item.start_time}} - {{item.end_time}}</p>
 					<p>
-						<u-tag :text="item.tag" mode="light" />
+						<u-tag :text="item.tag" mode="light"  class="autotag" />
 						<text>{{item.view_num}}人访问</text>
 					</p>
 					<p>{{item.address}}</p>
@@ -88,8 +88,10 @@
 					}
 					&:nth-child(3){
 						display: flex;
-						justify-content: space-between;
+						
 						text {
+							flex-basis: 30%;
+							
 							// &:first-child{
 							// 	background-color: #fa2209;
 							// 	color: #ecd1a2;
@@ -102,5 +104,10 @@
 				}
 			}
 		}
+	}
+
+	.autotag{
+		flex-basis: 68%;
+	
 	}
 </style>

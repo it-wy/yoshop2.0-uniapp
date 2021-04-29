@@ -97,7 +97,7 @@
         <view class="title">请选择支付方式</view>
         <view class="pop-content">
           <!-- 微信支付 -->
-          <!-- #ifdef MP-WEIXIN -->
+          
           <view class="pay-item dis-flex flex-x-between" v-if="order.pay_type==1 ? false: order.pay_type == 2? true :assets.points >=  Number(order.goods_price)? true: false" @click="onSelectPayType(PayTypeEnum.WECHAT.value)">
             <view class="item-left dis-flex flex-y-center">
               <view class="item-left_icon wechat">
@@ -108,7 +108,7 @@
               </view>
             </view>
           </view>
-          <!-- #endif -->
+          
           <!-- 余额支付 -->
           <view class="pay-item dis-flex flex-x-between" v-if="order.pay_type==1 ? false: order.pay_type == 2? true :assets.points >=  Number(order.goods_price)? true: false"  @click="onSelectPayType(PayTypeEnum.BALANCE.value)">
             <view class="item-left dis-flex flex-y-center">

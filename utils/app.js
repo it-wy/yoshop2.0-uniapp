@@ -183,7 +183,10 @@ export const wxPayment = (option) => {
       signType: 'MD5',
       paySign: options.paySign,
       success: res => resolve(res),
-      fail: res => reject(res)
+      fail: (res) => {
+        console.log(JSON.stringify(res));
+        reject(res)
+      }  
     })
   })
 }

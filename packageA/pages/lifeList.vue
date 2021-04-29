@@ -156,9 +156,14 @@
 			// 	delta:1,
 			// })
 			// uni.redirectTo({ url: '/pages/custom/index?pageId=10002' })
+			/* #ifdef MP-WEIXIN */
+			uni.navigateBack({
+				delta:1,
+			})
+			/* #endif */
 		},
 		onBackPress({from}){
-			
+			/* #ifdef APP-PLUS */
 			if(from=='navigateBack'){
 				return false
 			}else {
@@ -166,6 +171,8 @@
 					delta:1,
 				})
 			}
+			/* #endif */
+			
 			
 		},
 		onLoad(options) {

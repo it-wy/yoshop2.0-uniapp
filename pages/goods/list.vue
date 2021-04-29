@@ -140,7 +140,7 @@
 		</view>
 
     <view class="action_btn">
-      <button type="default">重置</button>
+      <button type="default" @click="resetBrand">重置</button>
       <button type="default">确定</button>
     </view>
 	</u-popup>
@@ -302,6 +302,11 @@
       onSelect(i){
         this.idx = i;
       },
+      // 重置
+      resetBrand(){
+        const app = this;
+        app.idx = 0;
+      }
 
     },
 

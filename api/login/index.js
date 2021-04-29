@@ -4,6 +4,7 @@ import request from '@/utils/request'
 const api = {
   login: 'passport/login',
   mpWxLogin: 'passport/mpWxLogin',
+  appWxLogin:'',
   captcha: 'passport/captcha',
   sendSmsCaptcha: 'passport/sendSmsCaptcha'
 }
@@ -16,6 +17,12 @@ export function login(data) {
 // 微信小程序快捷登录
 export function mpWxLogin(data, option) {
   return request.post(api.mpWxLogin, data, option)
+}
+
+// app微信登录
+
+export function appWxLogin(data, option) {
+  return request.post(api.appWxLogin, data, option)
 }
 
 // 图形验证码

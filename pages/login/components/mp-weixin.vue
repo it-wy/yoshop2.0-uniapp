@@ -17,9 +17,7 @@
 	  <button class="button btn-normal" @click.stop="getUserProfile">授权登录</button>
 	  <!-- #endif -->
       
-	  <!-- #ifdef APP-PLUS -->
-	 <button class="button btn-normal" @click="handleThirdLoginApp">微信登录</button>
-	  <!-- #endif -->
+	  
 	  
     </view>
     <view class="no-login-btn">
@@ -63,97 +61,9 @@
         })
       },
 	  
-	  // app微信登录
-	  //app第三方登录
 	  
-	  handleThirdLoginApp(){
 	  
-	  console.log("App微信拉起授权")
 	  
-	  var that=this
-	  
-	  uni.getProvider({
-	  
-	      service: 'oauth',
-	  
-	      success: function(res) {
-	  
-	          console.log(res.provider);
-	  
-	          //支持微信、qq和微博等
-	  
-	          if (~res.provider.indexOf('weixin')) {
-	  
-	              uni.login({
-	  
-	                provider: 'weixin',
-	  
-	                success: function (loginRes) {
-	  
-	    				console.log("App微信获取用户信息成功",loginRes);
-	  
-	                    that.getApploginData(loginRes)  //请求登录接口方法
-	  
-	                },
-	  
-	                fail:function(res){
-	  
-	                console.log("App微信获取用户信息失败",res);
-	  
-	                }
-	  
-	              })
-	  
-	          }
-	  
-	      }
-	  
-	  });
-	  
-	  },
-	  
-	  //请求登录接口方法
-	  
-	  getApploginData(data){
-	  
-	  var that =this
-	  
-	  //这边是前端自己去调微信用户信息的接口，根据接口需要请求，如果不需要前端去获取的话就交给后端，可省去次操作
-	  
-	  uni.request({
-	  
-	  url: "https://api.weixin.qq.com/sns/userinfo?access_token="+data.authResult.access_token+"&openid="+data.authResult.openid,
-	  
-	  method: 'GET',
-	  
-	  dataType: 'json',
-	  
-	  header: {
-	  
-	    'content-type': 'application/x-www-form-urlencoded' // 默认值
-	  
-	  },
-	  
-	  success(res) {
-	  
-	  console.log('【登录回调啾啾啾】',res)
-	  res.data.nickName = res.data.nickname;
-	   res.data.avatarUrl = res.data.headimgurl
-		res.data.gender = res.data.sex
-	  that.onAuthSuccess(res.data)
-			  // that.$api.ajax('smdc/index/applogin', res.data,function(ret){
-			  
-			  // console.log("登录接口成功回调：",ret)
-			  
-			  // },'POST',true)
-	
-	  },fail() {
-	  
-	  }
-	  
-	  })
-	  
-	  },
 	  
 
       // 获取微信用户信息(新版)

@@ -1,17 +1,17 @@
 <template>
   <div>
     <MpWeixin v-if="isShowUserInfo" @success="onGetUserInfoSuccess" />
-    <!-- <Main v-else :isParty="isExistUserInfo" :partyData="partyData" /> -->
+    <Main v-else :isParty="isExistUserInfo" :partyData="partyData" />
   </div>
 </template>
 
 <script>
-  // import Main from './components/main'
+  import Main from './components/main'
   import MpWeixin from './components/mp-weixin'
 
   export default {
     components: {
-      // Main,
+      Main,
       MpWeixin
     },
 
@@ -32,7 +32,7 @@
     onLoad(options) {
       const app = this
 	  
-	  
+      
 
 		
   
@@ -43,9 +43,13 @@
     },
 	onShow() {
 		const app = this;
-		uni.getStorage({
+    // #ifdef MP-WEIXIN
+    
+    
+    uni.getStorage({
 			key:'wxlogin',
 			fail() {
+        
 				uni.setStorage({
 					key:'wxlogin',
 						data:true,
@@ -57,9 +61,13 @@
 				})
 			},
 			success(){
+        
 				app.isShowUserInfo = true;
 			}
 		})
+		// #endif
+    
+		
 	},
     methods: {
 
