@@ -348,7 +348,43 @@
         "style": {
           "navigationBarTitleText": "积分夺宝"
         }
-      }
+      },
+      {
+        "path": "pages2/index/index",
+        "style": {
+         "navigationBarTitleText": "用户帮助与反馈"
+        }
+       },{
+        "path": "pages2/talent/index",
+        "style": {
+         "navigationBarTitleText": "如何成为达人"
+        }
+       },{
+        "path": "pages2/buy/index",
+        "style": {
+         "navigationBarTitleText": "购买流程"
+        }
+       },{
+        "path": "pages2/withdraw/index",
+        "style": {
+         "navigationBarTitleText": "用户提现"
+        }
+       },{
+        "path": "pages2/pay/index",
+        "style": {
+         "navigationBarTitleText": "如何支付给商家"
+        }
+       },{
+        "path": "pages2/receive-payment/index",
+        "style": {
+         "navigationBarTitleText": "商家如何收款"
+        }
+       },{
+        "path": "pages2/share/index",
+        "style": {
+         "navigationBarTitleText": "用户分享"
+        }
+       }
 		]
 		
 	}],

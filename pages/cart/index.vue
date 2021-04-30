@@ -177,6 +177,7 @@
         CartApi.list()
           .then(result => {
             app.list = result.data.list
+           app.$toast(app.list.length);
             app.total = result.data.cartTotal
             // 清除checkedIds中无效的ID
             app.onClearInvalidId()

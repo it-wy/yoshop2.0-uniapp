@@ -57,7 +57,7 @@
         <text>登录</text>
       </view>
       <!-- #ifdef APP-PLUS -->
-      <view class="login-button greens" v-show="!isapplogin" @click="handleThirdLoginApp">
+      <view class="login-button greens" v-show="isapplogin" @click="handleThirdLoginApp">
         <text>微信登录</text>
       </view>
       <!-- #endif -->
@@ -338,7 +338,7 @@ export default {
           .then(result => {
             // 显示登录成功
             app.$toast(result.message)
-            app.submitLogin();
+            
             // 跳转回原页面
             setTimeout(() => {
               app.onNavigateBack(1)

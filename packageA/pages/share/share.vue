@@ -145,13 +145,12 @@
 					provider: 'weixin',
 					scene: "WXSceneSession",
 					type: 5,
-					imageUrl: 'https://bjetxgzv.cdn.bspapp.com/VKCEYUGU-uni-app-doc/962fc340-4f2c-11eb-bdc1-8bd33eb6adaa.png',
+					imageUrl: 'http://pic.tralife.cn/10001/20210430/0cf43d82a941f9bea56e9e7bec596cde.png',
 					title: '旅享生活',
 					miniProgram: {
 						id: 'gh_6790f13273c8',
-						path: 'pages/index/index?scene='+store.getters.userId',
+						path: 'pages/index/index?scene='+store.getters.userId,
 						type: 0,
-						webUrl: 'http://uniapp.dcloud.io'
 					},
 					success: ret => {
 						console.log(JSON.stringify(ret));

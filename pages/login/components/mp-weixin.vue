@@ -114,7 +114,7 @@
             // app.onEmitSuccess(userInfo)
 			
 			// 一步登录
-			app.submitLogin(userInfo)
+			// app.submitLogin(userInfo)
 			
           })
       },

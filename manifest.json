@@ -84,7 +84,21 @@
                 }
             },
             "splashscreen" : {
-                "iosStyle" : "common"
+                "iosStyle" : "common",
+                "androidStyle" : "default",
+                "android" : {
+                    "hdpi" : "C:/Users/USER/Desktop/启动/480.png",
+                    "xhdpi" : "C:/Users/USER/Desktop/启动/720.png",
+                    "xxhdpi" : "C:/Users/USER/Desktop/启动/1080.png"
+                }
+            },
+            "icons" : {
+                "android" : {
+                    "hdpi" : "C:/Users/USER/Desktop/android/mipmap-hdpi/ic_launcher.png",
+                    "xhdpi" : "C:/Users/USER/Desktop/android/mipmap-xhdpi/ic_launcher.png",
+                    "xxhdpi" : "C:/Users/USER/Desktop/android/mipmap-xxhdpi/ic_launcher.png",
+                    "xxxhdpi" : "C:/Users/USER/Desktop/android/mipmap-xxxhdpi/ic_launcher.png"
+                }
             }
         }
     },

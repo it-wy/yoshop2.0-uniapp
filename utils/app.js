@@ -1,7 +1,7 @@
 import store from '../store'
 import * as util from './util'
 import { paginate } from '@/common/constant'
-
+import md5 from './md5'
 /**
  * 获取当前运行的终端(App H5 小程序)
  * https://uniapp.dcloud.io/platform
@@ -162,6 +162,51 @@ export const checkLogin = () => {
   return !!store.getters.userId
 }
 
+
+ //二次签名
+ function getPayInfo (orderInfo) {
+	let res = orderInfo, // 后台返回的统一下单数据
+		key = "5970CC553E305FCCC225F50755EA818B", // 加密Key，微信支付填写的key（后台提供）
+		payInfo = {
+			appid: res.appid,
+			noncestr:res.noncestr,
+			package: 'Sign=WXPay',
+			partnerid: res.partnerid,
+			prepayid: res.prepayid,
+			timestamp: Number(res.timestamp),
+	}
+	// 键值对按照ASCII码从小到大排序生成类似：appid=xxx&body=xx&device_info=1000
+	let keyValueStr = mapObjToKeyValue(payInfo, true);
+	// 插入加密Key到最后
+	let strSignTemp = `${keyValueStr}&key=${key}`;
+	// 真正的二次加密（需要引入md5.js源码，小编文章最后会附）
+	let sign = md5(strSignTemp).toUpperCase().substr(0, 32);	
+	console.log(sign) // 可以去微信支付文档做校验
+	payInfo.sign = sign;
+	// 返回字符串给uniapp调起支付用
+	return JSON.stringify(payInfo);
+}
+
+/*
+ * 根据object生成key value字符串
+ * @params obj: any 要map的对象
+ * @params isSort: boolean 是否根据ASCII字典排序
+ */
+function mapObjToKeyValue(obj, isSort = false) {
+	let keys = Object.keys(obj);
+	let str = "";
+	
+	if (isSort) keys.sort();
+	keys.forEach(key => {
+		if (obj.hasOwnProperty(key)) {
+			str += `${key}=${obj[key]}&`;
+		}
+	});
+	return str.replace(/&$/, "");
+}
+
+
+
 /**
  * 发起支付请求
  * @param {Object} 参数
@@ -174,6 +219,47 @@ export const wxPayment = (option) => {
     paySign: '',
     ...option
   }
+  /* #ifdef APP-PLUS */
+  const orderInfo  = {
+    appid: 'wxf045fd10aa00e07e',
+    timestamp: options.timeStamp,
+    noncestr: options.nonceStr,
+    package: 'Sign=WXPay',
+    prepayid: options.prepay_id,
+    partnerid: '1590037521',  
+    sign: options.paySign,
+  }
+
+  let weixinorder = getPayInfo(orderInfo);
+
+
+ 
+
+
+
+  return new Promise((resolve, reject) => {
+    uni.requestPayment({
+      provider: 'wxpay',
+      orderInfo: weixinorder,
+      success: res => resolve(res),
+      fail: (res) => {
+        uni.showModal({
+          content: "支付失败,其原因为: " + JSON.stringify(res),
+            showCancel: false
+        })
+
+        uni.showModal({
+          content: "支付失败,其原因为: " + JSON.stringify(orderInfo),
+            showCancel: false
+        })
+
+        console.log(JSON.stringify(res));
+        reject(res)
+      }  
+    })
+  })
+  /* #endif */
+  /* #ifdef MP-WEIXIN */
   return new Promise((resolve, reject) => {
     uni.requestPayment({
       provider: 'wxpay',
@@ -184,11 +270,18 @@ export const wxPayment = (option) => {
       paySign: options.paySign,
       success: res => resolve(res),
       fail: (res) => {
+        uni.showModal({
+          content: "支付失败,其原因为: " + JSON.stringify(res),
+            showCancel: false
+        })
+
         console.log(JSON.stringify(res));
         reject(res)
       }  
     })
   })
+  /* #endif */
+  
 }
 
 /**
