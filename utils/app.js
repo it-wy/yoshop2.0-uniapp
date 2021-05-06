@@ -243,15 +243,15 @@ export const wxPayment = (option) => {
       orderInfo: weixinorder,
       success: res => resolve(res),
       fail: (res) => {
-        uni.showModal({
-          content: "支付失败,其原因为: " + JSON.stringify(res),
-            showCancel: false
-        })
+        // uni.showModal({
+        //   content: "支付失败,其原因为: " + JSON.stringify(res),
+        //     showCancel: false
+        // })
 
-        uni.showModal({
-          content: "支付失败,其原因为: " + JSON.stringify(orderInfo),
-            showCancel: false
-        })
+        // uni.showModal({
+        //   content: "支付失败,其原因为: " + JSON.stringify(orderInfo),
+        //     showCancel: false
+        // })
 
         console.log(JSON.stringify(res));
         reject(res)
@@ -270,10 +270,10 @@ export const wxPayment = (option) => {
       paySign: options.paySign,
       success: res => resolve(res),
       fail: (res) => {
-        uni.showModal({
-          content: "支付失败,其原因为: " + JSON.stringify(res),
-            showCancel: false
-        })
+        // uni.showModal({
+        //   content: "支付失败,其原因为: " + JSON.stringify(res),
+        //     showCancel: false
+        // })
 
         console.log(JSON.stringify(res));
         reject(res)

@@ -6,11 +6,11 @@
 					旅享生活账户
 				</view>
 				<view class="value">
-					+86 {{ info.phone }}
+					{{ info.mobile?info.mobile:'--' }}
 				</view>
 			</view>
 			<view class="avatar">
-				<image :src="info.avatar"></image>
+				<image :src="info.avatar_url?info.avatar_url:avatars"></image>
 			</view>
 		</view>
 		<view class="buttons">
@@ -43,13 +43,14 @@
 </template>
 
 <script>
+import * as UserApi from '@/api/user'
 	export default {
 		data() {
 			return {
 				info: {
-					phone: 16576879070,
-					avatar: 'http://pic.tralife.cn/10001/20210430/6360ef35ad4bfb75b42a8a94905d7e53.png'
+					phone: '',
 				},
+				avatars: 'http://pic.tralife.cn/10001/20210430/6360ef35ad4bfb75b42a8a94905d7e53.png',
 				buttons: [{
 					img: 'http://pic.tralife.cn/10001/20210430/3b75a77c796076ada8da772e256dd6dc.png',
 					text: '登录密码',
@@ -87,7 +88,7 @@
 			}
 		},
 		onLoad() {
-
+			this.getUserInfo();
 		},
 		methods: {
 			// 点击中间两块
@@ -97,7 +98,9 @@
 						this.$navTo('packageA/pages/editpass/editpass?type=name')
 						break;
 					case 1:
-						
+						/* #ifdef APP-PLUS */
+						this.$toast('app平台暂不支持客服功能，请到小程序可以体验')
+						/* #endif */
 						break;
 				}
 			},
@@ -105,6 +108,27 @@
 			onTap(val) {
 				uni.navigateTo({
 					url: val
+				})
+			},
+			// 获取当前用户信息
+			getUserInfo() {
+				const app = this
+				return new Promise((resolve, reject) => {
+				UserApi.info()
+					.then(result => {
+					app.info = result.data.userInfo
+					
+					
+					resolve(app.info)
+					})
+					.catch(err => {
+					if (err.result && err.result.status == 401) {
+						// app.isLogin = false
+						resolve(null)
+					} else {
+						reject(err)
+					}
+					})
 				})
 			},
 		}
