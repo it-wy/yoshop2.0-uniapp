@@ -22,7 +22,7 @@
         />
       </view>
       <!-- 图形验证码 -->
-      <view class="form-item" v-show="!isapplogin">
+      <!-- <view class="form-item" v-show="!isapplogin">
         <input
           class="form-item--input"
           type="text"
@@ -35,7 +35,7 @@
             <image class="image" :src="captcha.base64"></image>
           </view>
         </view>
-      </view>
+      </view> -->
       <!-- 短信验证码 -->
       <view class="form-item" v-show="!isapplogin">
         <input
@@ -141,8 +141,9 @@ export default {
       // 验证获取短信验证码
       if (scene === GET_CAPTCHA) {
         if (
-          !app.validteMobile(app.mobile) ||
-          !app.validteCaptchaCode(app.captchaCode)
+          !app.validteMobile(app.mobile) 
+          // ||
+          // !app.validteCaptchaCode(app.captchaCode)
         ) {
           return false;
         }
@@ -150,8 +151,9 @@ export default {
       // 验证提交登录
       if (scene === SUBMIT_LOGIN) {
         if (
-          !app.validteMobile(app.mobile) ||
-          !app.validteSmsCode(app.smsCode)
+          !app.validteMobile(app.mobile) 
+          // ||
+          // !app.validteSmsCode(app.smsCode)
         ) {
           return false;
         }
@@ -228,7 +230,22 @@ export default {
     handleLogin() {
       const app = this;
       if (!app.isLoading && app.formValidation(SUBMIT_LOGIN)) {
+        /* #ifdef H5 */
+        let ua = navigator.userAgent.toLowerCase();
+        
+        if (ua.match(/MicroMessenger/i) == "micromessenger") {
+          
+          app.submitLogin()
+        }else{
+          
+          app.submitH5Login()
+        }
+        /* #endif */
+        
+        /* #ifdef MP-WEIXIN || APP-PLUS */
         app.submitLogin()
+        /* #endif */
+        
         
       }
     },
@@ -253,6 +270,32 @@ export default {
           // }, 2000);
           app.isapplogin = true;
           app.$toast('请点击微信登录');
+        })
+        .finally(() => (app.isLoading = false));
+    },
+
+    // h5浏览器登录
+    submitH5Login() {
+      const app = this;
+      app.isLoading = true;
+      store
+        .dispatch("H5Login", {
+          smsCode: app.smsCode,
+          mobile: app.mobile,
+          isParty: app.isParty,
+          partyData: app.partyData,
+        })
+        .then((result) => {
+          
+          
+          // 显示登录成功
+         app.$toast(result.message)
+          // 跳转回原页面
+          setTimeout(() => {
+            app.onNavigateBack(2);
+          }, 2000);
+          
+          
         })
         .finally(() => (app.isLoading = false));
     },

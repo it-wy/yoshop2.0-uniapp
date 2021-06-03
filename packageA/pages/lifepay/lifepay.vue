@@ -66,21 +66,26 @@ export default {
     onCome(i){
       switch (i) {
         case 'pay1':
+          // this.$navTo('packageA/pages/paylife/paylife?type='+i)
           this.$toast('正在开发中')
           break;
         case 'pay2':
           this.$navTo('packageA/pages/paylife/paylife?type='+i)
           break;  
         case 'pay3':
+          // this.$navTo('packageA/pages/payCommon/payCommon?type='+i)
           this.$toast('正在开发中')
           break;
         case 'pay4':
+          // this.$navTo('packageA/pages/payCommon/payCommon?type='+i)
           this.$toast('正在开发中')
           break;
         case 'pay5':
+          // this.$navTo('packageA/pages/payCommon/payCommon?type='+i)
           this.$toast('正在开发中')
           break;
         case 'pay6':
+          // this.$navTo('packageA/pages/paylife/paylife?type='+i)
           this.$toast('正在开发中')
           break;      
         default:
@@ -199,6 +204,8 @@ export default {
     }
   }
 }
+
+
 
 
 </style>

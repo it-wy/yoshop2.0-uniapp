@@ -158,7 +158,13 @@
         const app = this
         uni.getSystemInfo({
           success(res) {
+            /* #ifdef H5 */
+            app.scrollHeight = res.windowHeight - 9
+            /* #endif */
+            /* #ifdef APP-PLUS || MP-WEIXIN */
             app.scrollHeight = res.windowHeight - 47
+            /* #endif */
+            
           }
         })
       },
@@ -341,3 +347,5 @@
     padding: 0 10px;
   }
 </style>
+
+

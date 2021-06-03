@@ -229,8 +229,10 @@
         const { formData } = app
         // 整理上传文件路径
         const files = []
+        console.log(formData);
         formData.forEach((item, index) => {
           if (item.content.trim() && item.imageList.length) {
+            console.log(item.imageList);
             const images = item.imageList.map(image => image)
             files.push({ formDataIndex: index, images })
           }
@@ -239,6 +241,7 @@
         return new Promise((resolve, reject) => {
           Promise.all(files.map((file, index) => {
               return new Promise((resolve, reject) => {
+                
                 UploadApi.image(file.images)
                   .then(fileIds => {
                     app.formData[index].uploaded = fileIds

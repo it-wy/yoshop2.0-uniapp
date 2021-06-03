@@ -2,6 +2,10 @@ import store from '../store'
 import * as util from './util'
 import { paginate } from '@/common/constant'
 import md5 from './md5'
+/* #ifdef H5 */
+import jweixin from './jweixin'
+/* #endif */
+
 /**
  * 获取当前运行的终端(App H5 小程序)
  * https://uniapp.dcloud.io/platform
@@ -14,7 +18,16 @@ export const getPlatform = () => {
   const platform = 'App'
   // #endif
   // #ifdef H5
-  const platform = 'H5'
+  let ua = navigator.userAgent.toLowerCase();
+        
+  if (ua.match(/MicroMessenger/i) == "micromessenger") {
+    
+    var platform = 'H5'
+  }else{
+    
+    var platform = 'X5'
+  }
+  
   // #endif
   // #ifdef MP-WEIXIN
   const platform = 'MP-WEIXIN'
@@ -219,6 +232,10 @@ export const wxPayment = (option) => {
     paySign: '',
     ...option
   }
+
+  
+
+
   /* #ifdef APP-PLUS */
   const orderInfo  = {
     appid: 'wxf045fd10aa00e07e',
@@ -259,6 +276,7 @@ export const wxPayment = (option) => {
     })
   })
   /* #endif */
+
   /* #ifdef MP-WEIXIN */
   return new Promise((resolve, reject) => {
     uni.requestPayment({
@@ -281,6 +299,59 @@ export const wxPayment = (option) => {
     })
   })
   /* #endif */
+
+
+  /* #ifdef H5 */
+  return new Promise((resolve, reject) => {
+  let ua = navigator.userAgent.toLowerCase();
+        
+  if (ua.match(/MicroMessenger/i) == "micromessenger") {
+   
+      jweixin.config({
+        debug: false, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
+        appId:'wx374b7f026d00b120', // 必填，公众号的唯一标识
+        timestamp:options.timeStamp, // 必填，生成签名的时间戳
+        nonceStr:options.nonceStr, // 必填，生成签名的随机串
+        signature:options.paySign, // 必填，签名，见附录1
+        jsApiList: ['chooseWXPay'] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
+      });
+    
+    
+      jweixin.ready(function(){  
+        jweixin.chooseWXPay({
+          timestamp: options.timeStamp, // 支付签名时间戳，注意微信jssdk中的所有使用timestamp字段均为小写。但最新版的支付后台生成签名使用的timeStamp字段名需大写其中的S字符
+          nonceStr: options.nonceStr, // 支付签名随机串，不长于 32 位
+          'package': `prepay_id=${options.prepay_id}`, // 统一支付接口返回的prepay_id参数值，提交格式如：prepay_id=***）
+          signType: 'MD5', // 签名方式，默认为'SHA1'，使用新版支付需传入'MD5'
+          paySign:options.paySign, // 支付签名
+          success:res=> {
+              // 支付成功后的回调函数
+              resolve(res);
+          },
+          fail:err=> {
+            // 支付失败后的回调函数
+            
+            reject(err);
+          },
+          cancel:res=>{
+           
+            reject(res);
+          }
+        })
+    
+      });
+    
+    
+  }else{
+
+    // 跳转微信
+    
+    window.location.href = options.payUrl;
+  }
+})  
+
+/* #endif */
+
   
 }
 

@@ -3,14 +3,25 @@
 		
 	
 	<view class="container">
+		<!-- #ifdef APP-PLUS -->
 		<u-sticky>
+			<view style="width: 100%;background-color: #fff;">
+				<view style="width: 400rpx;margin: 0 auto;">
+					<u-tabs :list="list" :is-scroll="false" :current="current" @change="change"></u-tabs>
+				</view>
+			</view>
+		</u-sticky>
+		<!-- #endif -->
+		
+		
+		<!-- #ifdef H5 -->
+		
 		<view style="width: 100%;background-color: #fff;">
 			<view style="width: 400rpx;margin: 0 auto;">
 				<u-tabs :list="list" :is-scroll="false" :current="current" @change="change"></u-tabs>
 			</view>
 		</view>
-		
-		</u-sticky>
+		<!-- #endif -->
 		<!-- 轮播 -->
 		<u-swiper :list="lists" height="500"></u-swiper>
 		<!-- 介绍 -->

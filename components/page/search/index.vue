@@ -55,23 +55,24 @@
 			form:{
 				lat:'',
 				lng:''
-			}
+			},
+			isonload: false
 		}
 	},
 	watch:{
 		address(v){
 			const app = this;
 			
-			if(typeof v == typeof []){
-				const address = v[0].label+v[1].label+v[2].label;
+			if(typeof v == typeof [] && app.isonload){
+				const address_city = v[0].label+v[1].label+v[2].label;
 				// 执行定位回调
 				return new Promise((resolve, reject) => {
-				  ShopApi.city({address:address})
+				  ShopApi.city({address:address_city})
 				    .then(result => {
 				      
 						uni.setStorage({
 							key: 'gps',
-							data: {lat:result.data.lat, lng:result.data.lng,city:address},
+							data: {lat:result.data.lat, lng:result.data.lng,city:address_city},
 							success: function () {
 								// console.log('success');
 							}
@@ -103,6 +104,7 @@
 	  run(){
 		  // console.log("---")
 		  // 添加旋转样式
+		  this.isonload = true;
 		  if(this.iscity){
 			  this.iscity=false
 			  this.iscity2 = true
@@ -126,7 +128,8 @@
 	    return new Promise((resolve, reject) => {
 	      ShopApi.gps({lat:app.form.lat,lng: app.form.lng})
 	        .then(result => {
-	          app.address = [{label:result.data.province,value:1},{label:result.data.city, value:2},{label:result.data.district, value:3}]
+				
+			app.address = [{label:result.data.province,value:1},{label:result.data.city, value:2},{label:result.data.district, value:3}]
 			  
 	  		uni.setStorage({
 	  		    key: 'gps',
@@ -168,10 +171,13 @@
 	  },
 	  doGetLocation() {
 	      uni.getLocation({
+			  type:'gcj02',
+			  altitude:true,
 	          success: (res) => {
 	              this.hasLocation = true;
 	  			
-	              this.location = formatLocation(res.longitude, res.latitude);
+				this.location = formatLocation(res.longitude, res.latitude);
+
 	  			this.form.lat = res.latitude
 	  			this.form.lng = res.longitude
 	  			// 经纬度转地址

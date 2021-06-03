@@ -17,8 +17,8 @@
 				text: "成为达人后可以通过达人的身份，在旅享生活的平台上获得收益。",
 				text1: "在登录旅享生活小程序后，点击我的，选择申请达人。",
 				text2: "选择需要的商品同意协议支付后就可以成为达人",
-				img1: ["http://pic.tralife.cn/10001/20210430/b081a3cf991543c30e48a7071c3c9b9b.png"],
-				img2: ["http://pic.tralife.cn/10001/20210430/795f5f8c1431bd1f1e3c5705eff5d6dc.png"],
+				img1: ["https://pic.tralife.cn/10001/20210601/4924e0ae7fad9c0e462623e23fa1d4af.png"],
+				img2: ["https://pic.tralife.cn/10001/20210601/b374b46898f252a314fe52abc4bf317e.png"],
 			}
 		},
 		components:{

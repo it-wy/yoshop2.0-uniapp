@@ -61,7 +61,7 @@
               <view class="desc_footer">
                 <text class="price_x" v-if="item.pay_type == 1 || item.pay_type ==3">积分 {{ item.goods_point_min }}</text>
                 <text class="price_x" v-if="item.pay_type == 2 || item.pay_type ==3">¥{{ item.goods_price_min }}</text>
-                <text class="price_y col-9" v-if="item.line_price_min > 0 && item.pay_type != 1">¥{{ item.line_price_min }}</text>
+                <text class="price_y col-9" v-if="item.line_price_min > 0">¥{{ item.line_price_min }}</text>
               </view>
             </view>
           </view>
@@ -81,7 +81,7 @@
             <view class="detail-price onelist-hidden">
               <text class="goods-price f-30 col-m" v-if="item.pay_type == 1 || item.pay_type ==3">积分 {{ item.goods_point_min }}</text>
               <text class="goods-price f-30 col-m" v-if="item.pay_type == 2 || item.pay_type ==3">￥{{ item.goods_price_min }}</text>
-              <text v-if="item.line_price_min > 0 && item.pay_type != 1" class="line-price col-9 f-24">￥{{ item.line_price_min }}</text>
+              <text v-if="item.line_price_min > 0" class="line-price col-9 f-24">￥{{ item.line_price_min }}</text>
             </view>
           </view>
         </view>

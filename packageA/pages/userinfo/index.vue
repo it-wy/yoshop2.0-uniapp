@@ -28,7 +28,7 @@
 			</u-form>
 			<!-- <u-button @click="submit"  v-if="app.info.mobile!=''">修改</u-button> -->
 			<view class="btn">
-				<u-button type="primary" @click="quit()">注销账号</u-button>
+				<u-button type="primary" @click="quit()">退出登陆</u-button>
 			</view>
 			
 		</view>

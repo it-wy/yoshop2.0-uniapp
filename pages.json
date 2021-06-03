@@ -30,26 +30,52 @@
     {
       "path": "pages/index/index",
       "style": {
+        "navigationBarTitleText": "旅享生活",
         "enablePullDownRefresh": true
+        // #ifdef H5
+		,
+        "navigationStyle": "custom"
+        // #endif
+		
+         // #ifdef APP-PLUS || MP-WEIXIN
+		 ,
+         "navigationStyle": "default"
+         // #endif
       }
     },
     {
       "path": "pages/category/index",
       "style": {
         "navigationBarTitleText": "全部分类"
+        // #ifdef H5
+		,
+        "navigationStyle": "custom"
+        // #endif
+         // #ifdef APP-PLUS || MP-WEIXIN
+		 ,
+         "navigationStyle": "default"
+         // #endif
       }
     },
     {
       "path": "pages/cart/index",
       "style": {
         "navigationBarTitleText": "购物车"
+        // #ifdef H5
+		,
+        "navigationStyle": "custom"
+        // #endif
+         // #ifdef APP-PLUS || MP-WEIXIN
+		 ,
+         "navigationStyle": "default"
+         // #endif
       }
     },
     {
       "path": "pages/user/index",
       "style": {
         "navigationBarTitleText": "个人中心",
-        "enablePullDownRefresh": true,
+        "enablePullDownRefresh": false,
         "navigationStyle": "custom"
       }
     },
@@ -57,6 +83,14 @@
       "path": "pages/custom/index",
       "style": {
         "enablePullDownRefresh": true
+         // #ifdef H5
+		 ,
+         "navigationBarTitleText": ""
+         // #endif
+        // #ifdef APP-PLUS || MP-WEIXIN
+		,
+        "navigationBarTitleText": "本地生活"
+        // #endif
       }
     },
     {
@@ -161,12 +195,12 @@
         "navigationBarBackgroundColor": "#e8c269"
       }
     },
-    // {
-    //   "path": "pages/order/express/index",
-    //   "style": {
-    //     "navigationBarTitleText": "物流跟踪"
-    //   }
-    // },
+    {
+      "path": "pages/order/express/index",
+      "style": {
+        "navigationBarTitleText": "物流跟踪"
+      }
+    },
     {
       "path": "pages/order/comment/index",
       "style": {
@@ -200,7 +234,13 @@
 				"path" : "pages/lifeList",
 				"style" :                                                                                    
 				{
-					"navigationBarTitleText": "本地生活",
+					  // #ifdef H5
+					  "navigationBarTitleText": "",
+					  // #endif
+					 // #ifdef APP-PLUS || MP-WEIXIN
+					 "navigationBarTitleText": "本地生活",
+					 // #endif
+					
 					"enablePullDownRefresh": false
 				}
 			        
@@ -344,9 +384,108 @@
         }
       },
       {
+        "path": "pages/payCommon/payCommon",
+        "style": {
+          "navigationBarTitleText": ""
+        }
+      },
+      {
+        "path": "pages/billDetail/billDetail",
+        "style": {
+          "navigationBarTitleText": "账单详情"
+        }
+      },
+      {
+        "path": "pages/paumentUnit/paumentUnit",
+        "style": {
+          "navigationBarTitleText": "缴费单位"
+        }
+      },
+      {
+        "path": "pages/shopformSelect/shopformSelect",
+        "style": {
+          "navigationBarTitleText": "商家入驻"
+        }
+      },
+      {
         "path": "pages/flexList/flexList",
         "style": {
           "navigationBarTitleText": "积分夺宝"
+        }
+      },
+      {
+        "path": "pages/loot/loot",
+        "style": {
+          "navigationBarTitleText": ""
+        }
+      },
+      {
+        "path": "pages/treasureDetails/treasureDetails",
+        "style": {
+          "navigationBarTitleText": "",
+          "navigationStyle": "custom"
+        }
+      },
+      {
+        "path": "pages/awardDetail/awardDetail",
+        "style": {
+          "navigationBarTitleText": "领奖详情"
+        }
+      },
+      {
+        "path": "pages/cardrecharge/cardrecharge",
+        "style": {
+          "navigationBarTitleText": "消费卡充值"
+        }
+      },
+      {
+        "path": "pages/merchantsplit/merchantsplit",
+        "style": {
+          "navigationBarTitleText": "商家分账"
+        }
+      },
+      {
+        "path": "pages/nearbyStores/nearbyStores",
+        "style": {
+          "navigationBarTitleText": "附近门店"
+        }
+      },
+      {
+        "path": "pages/InviteRob/InviteRob",
+        "style": {
+          "navigationBarTitleText": "邀请夺宝",
+          "navigationStyle": "custom"
+        }
+      },
+      {
+        "path": "pages/eEarnPoints/eEarnPoints",
+        "style": {
+          "navigationBarTitleText": "积分获取与应用",
+          "navigationStyle": "custom"
+        }
+      },
+      {
+        "path": "pages/intergal/index",
+        "style": {
+          "navigationBarTitleText": "获取积分"
+        }
+      },
+      {
+        "path": "pages/shopformList/shopformList",
+        "style": {
+          "navigationBarTitleText": "入驻记录"
+        }
+      },
+      {
+        "path": "pages/merchAgreement/merchAgreement",
+        "style": {
+          "navigationBarTitleText": "指定合作商家协议"
+        }
+      },
+      {
+        "path": "pages/intergaltype/index",
+        "style": {
+          "navigationBarTitleText": "积分"
         }
       },
       {

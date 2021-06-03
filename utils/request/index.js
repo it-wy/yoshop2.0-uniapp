@@ -6,7 +6,13 @@ import request from './request'
 import config from '@/config'
 
 // 后端api地址
+/* #ifdef  H5 */
 const baseURL = config.apiUrl
+/* #endif */
+/* #ifdef MP-WEIXIN || APP-PLUS */
+const baseURL = config.apiUrl
+/* #endif */
+
 
 // 可以new多个request来支持多个域名请求
 const $http = new request({

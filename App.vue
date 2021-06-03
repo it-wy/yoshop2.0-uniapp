@@ -1,4 +1,5 @@
 <script>
+	import appUpdate from '@/utils/update.js';
   export default {
 
     /**
@@ -15,6 +16,17 @@
 		
       // 小程序主动更新
       this.updateManager()
+
+      // #ifdef APP-PLUS  
+      plus.runtime.getProperty(plus.runtime.appid, function(widgetInfo) {
+		  
+            appUpdate(widgetInfo);
+      });
+          
+          
+
+        
+      // #endif
     },
 
     methods: {
@@ -51,7 +63,15 @@
         })
       }
 
-    }
+    },
+    // onShow(options) {
+    //   uni.showModal({
+    //     title: ''+options.scene,
+    //     content: ''+options.scene,
+    //     showCancel: true,
+    //     success: ({ confirm, cancel }) => {}
+    //   })
+    // }
 
   }
 </script>
@@ -59,9 +79,15 @@
 <style lang="scss">
   /* 引入uView库样式 */
   @import "uview-ui/index.scss";
+
 </style>
 
 <style>
   /* 项目基础样式 */
-  @import "./app.scss";
+  @import "./app.scss"; 
+  /* #ifdef H5 */ 
+  /* uni-page-head { display: none; } */
+  
+  uni-page-wrapper::after{display: none;}
+   /* #endif */
 </style>

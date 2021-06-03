@@ -12,17 +12,22 @@
 				</u-form-item>
 
         <view class="payType">
+            <view class="flow-txt" v-show="payType=='pay6'">
+              <text>超值7天包</text>
+              <text>流量包7天有效，可跨月</text>
+            </view>
             <view v-for="(item,i) in list" :key="i" class="pay-item" :class="{active: idx==i}" @click="onPaytype(item,i)">
-              <p>{{item.selling_point}}<text>元</text></p>
-              <p>售价 &nbsp;{{parseInt(Number(item.goods_point_min))}}积分</p>
+              <p>{{item.selling_point}}<text :class="{blackberry:payType=='pay6'}">{{payType=='pay6'?'GB':'元'}}</text></p>
+              <p>售价&nbsp;{{parseInt(Number(item.goods_point_min))}}积分</p>
             </view>
         </view>
 
         <view class="paydesc">
           <p>充值须知</p>
           <p>1、每个用户每月 <text>只能充值一次</text>；  </p>
-          <p>2、一旦充值将无法退款，急用请慎拍！号码请仔细核对，个人原因充错号码概不负责！</p>
-          <p>3、本产品上线充值业务不提供任何发票</p>
+          <view v-html="description">
+
+          </view>
         </view>
 			</u-form>
     </view>
@@ -81,7 +86,10 @@ export default {
 							trigger: ['change','blur'],
 						}
         ],
-      }
+      },
+      payType:'', // 充值类型
+      
+      description:`<p>2、一旦充值将无法退款，急用请慎拍！号码请仔细核对，个人原因充错号码概不负责！</p><p>3、本产品上线充值业务不提供任何发票</p>` 
     }
   },
   methods: {
@@ -109,13 +117,18 @@ export default {
         this.$refs.uForm.validate(valid => {
 					 
 			  		if (valid) {
-              const app = this;
+              if(this.payType != 'pay6'){
+                const app = this;
               return new Promise((resolve, reject) => {
                   CheckoutApi.submit('buyNow',app.form)
                   .then(result => app.show = true)
                   .catch(err => {
                   })
               })	
+              }else {
+                this.$navTo('packageA/pages/billDetail/billDetail',{type:'流量'})
+              }
+              
             }
         })      
       },
@@ -175,17 +188,11 @@ export default {
         uni.setNavigationBarTitle({ title: '话费充值' })
         
         break;
-      case 'pay3':
-        
-        break;
-      case 'pay4':
-        
-        break;
-      case 'pay5':
-        
-        break;
       case 'pay6':
-        
+        this.payType = 'pay6';
+        this.description = `<p>2、流量包到账后无效，当月有效；</p><p>3、此流量包不支持港澳台地区以及国际漫游；</p>`
+        this.getGoodsList();
+        uni.setNavigationBarTitle({ title: '流量充值' })
         break;    
     
       default:
@@ -199,8 +206,6 @@ export default {
     this.$refs.uForm.setRules(this.rules);
     
   },
-  // 页面周期函数--监听页面显示(not-nvue)
-  onShow() {},
   // 页面周期函数--监听页面卸载
   onUnload() {},
   // 页面处理函数--监听用户上拉触底
@@ -226,14 +231,31 @@ export default {
   .paycard {
     background-color: #fff;
     border-radius: 10rpx;
-    padding: 20rpx 40rpx;
+    padding: 20rpx 40rpx 40rpx;
     box-sizing: border-box;
+    height: fit-content;
     .payType {
       display: flex;
       justify-content: space-between;
       align-items: center;
       margin: 40rpx 0 79rpx 0;
-      
+      flex-wrap: wrap;
+      .flow-txt {
+        width: 100%;
+        margin-bottom: 30rpx;
+        text {
+          font-size: 32rpx;
+          font-family: PingFang SC;
+          font-weight: 500;
+          color: #000000;
+          &:last-child{
+            margin-left: 18rpx;
+            font-size: 24rpx;
+            font-weight: 400;
+            color: #999999;
+          }
+        }
+      }
       .pay-item {
         background: #FFFFFF;
         box-shadow: 0px 2px 15px 0px rgba(0, 0, 0, 0.1);
@@ -333,6 +355,11 @@ export default {
     margin-top: 50rpx;
   }
   
+}
+
+.blackberry {
+  color: #333;
+  font-size: 60rpx !important;
 }
 
 </style>

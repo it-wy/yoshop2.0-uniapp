@@ -29,7 +29,7 @@
                   <!-- 商品价格 -->
                   <view class="desc_footer">
                     <text v-if="itemStyle.show.includes('goodsPrice')" class="price_x">¥{{ dataItem.goods_price_min }}</text>
-                    <text class="price_y col-9" v-if="itemStyle.show.includes('linePrice') && dataItem.line_price_min > 0 && dataItem.pay_type != 1">¥{{ dataItem.line_price_min }}</text>
+                    <text class="price_y col-9" v-if="itemStyle.show.includes('linePrice') && dataItem.line_price_min > 0">¥{{ dataItem.line_price_min }}</text>
                   </view>
                 </view>
               </view>
@@ -50,7 +50,7 @@
               <view class="detail-price onelist-hidden">
                 <text v-if="dataItem.pay_type == 1 || dataItem.pay_type ==3" class="goods-price f-30 col-m">积分 {{ dataItem.goods_point_min }}</text>
                 <text v-if="itemStyle.show.includes('goodsPrice') && dataItem.pay_type == 2 || dataItem.pay_type ==3" class="goods-price f-30 col-m">{{dataItem.pay_type ==3?'+':''}}￥{{ dataItem.goods_price_min }}</text>
-                <text v-if="itemStyle.show.includes('linePrice') && dataItem.line_price_min > 0 && dataItem.pay_type != 1" class="line-price col-9 f-24">￥{{ dataItem.line_price_min }}</text>
+                <text v-if="itemStyle.show.includes('linePrice') && dataItem.line_price_min > 0" class="line-price col-9 f-24">￥{{ dataItem.line_price_min }}</text>
               </view>
             </view>
           </block>
@@ -135,7 +135,7 @@
 
           .goods-name {
             height: 64rpx;
-            line-height: 1.3;
+            line-height: 1.2;
             white-space: normal;
             color: #484848;
             font-size: 26rpx;

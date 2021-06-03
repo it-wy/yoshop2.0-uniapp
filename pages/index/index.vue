@@ -64,8 +64,9 @@
       // 更新购物车角标
       setCartTabBadge()
 	  
-	  // 加载页面数据
-	  this.getPageData();
+      // 加载页面数据
+      this.getPageData();
+      
     },
 
     methods: {
@@ -83,6 +84,7 @@
             const { data: { pageData } } = result
             app.page = pageData.page
             app.items = pageData.items
+            
             // 设置顶部导航栏栏
             app.setPageBar();
           })

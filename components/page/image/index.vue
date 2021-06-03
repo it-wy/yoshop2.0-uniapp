@@ -40,7 +40,20 @@
                 return new Promise((resolve, reject) => {
                 UserApi.userFans({page:1})
                 .then(result => {
-                  this.$navTo('packageA/pages/gift/gift')
+                  uni.getStorage({
+                    key: 'dr_type',
+                    success: ({ data }) => {
+                      console.log(data);
+                      if(data == 'app'){
+                        this.$navTo('packageA/pages/gift/gift', { sku: 2 });
+                      }else if(data == '!app'){
+                        this.$navTo('packageA/pages/gift/gift', { sku: 1 });
+                      } 
+                    },
+                    fail: (error) => {}
+                  })
+                  
+                  
                   resolve(result.data)
                 })
                 .catch(err => {

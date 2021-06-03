@@ -30,7 +30,7 @@
 				form:{
 					page:1,
 					attr: 5,
-					
+					sku: ''
 				},
 				isMore: true,
 				shoplist:[]
@@ -50,7 +50,7 @@
 				  
 			  
 			  return new Promise((resolve, reject) => {
-			    GoodsApi.list({page:app.form.page, attr: app.form.attr,status:0})
+			    GoodsApi.list({page:app.form.page, attr: app.form.attr,status:0, sku: app.form.sku})
 			      .then(result => {
 					  this.isMore = result.data.list.current_page == result.data.list.last_page?false:true;
 						this.shoplist = this.shoplist.concat(result.data.list.data)
@@ -74,8 +74,10 @@
 			  }
 			},
 		},
-		onLoad() {
-			this.getShopList()
+		onLoad(options) {
+			const app = this;
+			app.form.sku = options.sku;
+			app.getShopList()
 		},
 		onReachBottom() {
 			this.form.page++

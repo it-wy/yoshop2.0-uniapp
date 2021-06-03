@@ -20,6 +20,7 @@ const loginSuccess = (commit, { token, userId }) => {
   // 记录到store全局变量
   commit('SET_TOKEN', token)
   commit('SET_USER_ID', userId)
+
 }
 
 const user = {
@@ -54,10 +55,50 @@ const user = {
       })
     },
 
+    // 用户登录
+    Logins({ commit }, data) {
+      return new Promise((resolve, reject) => {
+        LoginApi.logins({ form: data })
+          .then(response => {
+            const result = response.data
+            loginSuccess(commit, result)
+            resolve(response)
+          })
+          .catch(reject)
+      })
+    },
+
+    // h5浏览器用户登录
+    H5Login({ commit }, data) {
+      return new Promise((resolve, reject) => {
+        LoginApi.H5Login({ form: data })
+          .then(response => {
+            const result = response.data
+            loginSuccess(commit, result)
+            resolve(response)
+          })
+          .catch(reject)
+      })
+    },
+
     // 微信小程序快捷登录
     MpWxLogin({ commit }, data) {
       return new Promise((resolve, reject) => {
         LoginApi.mpWxLogin({ form: data }, { isPrompt: false })
+          .then(response => {
+            const result = response.data
+            loginSuccess(commit, result)
+            resolve(response)
+          })
+          .catch(reject)
+      })
+    },
+
+    // 微信H5快捷登录
+    MpWxH5Login({ commit }, data) {
+      return new Promise((resolve, reject) => {
+        
+        LoginApi.mpWxH5Login({ code: data }, { isPrompt: false })
           .then(response => {
             const result = response.data
             loginSuccess(commit, result)

@@ -2,7 +2,7 @@
   <view class="container" v-if="!isLoading">
     <view class="space-upper">
       <view class="wallet-image">
-        <image src="http://php.tralife.cn/uploads/10001/20210408/3f467032a569dbb5c7b173ff6a1505eb.png" mode="widthFix"></image>
+        <image src="https://www.tralife.cn/uploads/10001/20210408/3f467032a569dbb5c7b173ff6a1505eb.png" mode="widthFix"></image>
       </view>
       <view class="wallet-account">
         <view class="wallet-account_balance">

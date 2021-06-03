@@ -44,10 +44,10 @@
     <!-- 快递配送：配送地址 -->
     <view class="delivery-address i-card">
       <view class="link-man">
-        <text class="name">{{ order.address.name }}</text>
-        <text class="phone">{{ order.address.phone }}</text>
+        <text class="name">{{ order.address!=null ? order.address.name:'' }}</text>
+        <text class="phone">{{ order.address!=null ? order.address.phone:'' }}</text>
       </view>
-      <view class="address">
+      <view class="address" v-if="order.address!=null">
         <text class="region" v-for="(region, idx) in order.address.region" :key="idx">{{ region }}</text>
         <text class="detail">{{ order.address.detail }}</text>
       </view>
@@ -74,7 +74,7 @@
         </view>
       </view>
       <view class="right-arrow">
-        <text class="iconfont icon-xiangyoujiantou"></text>
+        <text class="iconfont icon-xiangyoujiantou" @click="handleTargetExpress"></text>
       </view>
     </view>
 

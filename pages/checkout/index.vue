@@ -285,8 +285,6 @@
         showPoints: false,
         // 是否显示优惠券弹窗
         showPopup: false,
-        // 按钮禁用
-        disabled: false,
         // 订单信息 (从后端api中获取)
         order: {
           // 商品列表

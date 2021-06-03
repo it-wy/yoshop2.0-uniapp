@@ -15,14 +15,17 @@ const api = {
   userFans: 'user/user_list',
   userWith: 'draw_log/add',
   withLog: 'draw_log/list',
-  qrCode: 'wxapp/getMinWechatQrcode',
+  qrCode: 'user/get_user_qr_code',
   editMobile: 'user/update_phone',
   userShare: 'user/create',
   userNewPassword: 'user/update_pass',
   userShopWith: 'shop/shop_withdrawal',
   userShopWithList: 'shop/shop_withdrawal_list',
   userShopWithDefault:'user/user_bank_info',
-  userShopPayList:'shop/get_shop_sale_list'
+  userShopPayList:'shop/get_shop_sale_list',
+  userOpenShare: 'wxapp/getSignPackage',
+  agree: 'shop/signAgreement',
+  interRecharge: 'user/integralRecharge'
 }
 
 // 当前登录的用户信息
@@ -126,11 +129,27 @@ export const userShopWithDefault = (param, option) => {
 }
 
 // 
-
-
 export const userShopPayList = (param, option) => {
   return request.post(api.userShopPayList, param)
 }
+
+
+// 用户分享签名
+export const userOpenShare = (param, option) => {
+  return request.post(api.userOpenShare, param)
+}
+
+// 用户同意协议
+export const agree = (param, option) => {
+  return request.post(api.agree, param)
+}
+
+// 用户消费卡充值
+export const interRecharge = (param, option) => {
+  return request.post(api.interRecharge, param)
+}
+
+
 
 
 

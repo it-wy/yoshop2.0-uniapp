@@ -87,7 +87,13 @@
         </div>
       </div>
     </view>
-
+    <!-- 悬浮地图按钮 -->
+    <view class="map-btn" v-if="islife" @click="targetmap">
+      <image
+        src="/static/map-btn.png"
+        mode="widthFix"
+      />
+    </view>
     <!-- 本地生活 -->
 
     <Lifes v-if="islife" :shoplist="shoplist" />
@@ -314,6 +320,9 @@ export default {
         url: "/packageA/pages/shopDesc/shopDesc?id=" + i.shop_id,
       });
     },
+    targetmap(){
+      this.$navTo('packageA/pages/nearbyStores/nearbyStores')
+    }
   },
   created() {
     const app = this;
@@ -355,7 +364,12 @@ export default {
           app.form.lat = res.data.lat;
           app.form.lng = res.data.lng;
           app.getShopList();
+          
         },
+        fail: (error) => {
+          app.getShopList();
+
+        }
       });
     }
 
@@ -382,7 +396,7 @@ export default {
     text-align: center;
     padding: 20rpx;
     font-weight: bold;
-    background-image: url(http://php.tralife.cn/uploads/10001/20210408/d1b849cc48b301f3be61db9aa7fdb19f.png)
+    background-image: url(https://www.tralife.cn/uploads/10001/20210408/d1b849cc48b301f3be61db9aa7fdb19f.png)
       no-repeat;
   }
   .active_tab {
@@ -485,5 +499,19 @@ export default {
   margin-bottom: 20rpx;
   color: #fa2209;
   background-color: #fff;
+}
+
+.map-btn {
+  position: fixed;
+  bottom: 180rpx;
+  right: 40rpx;
+  z-index: 99;
+  width: 90rpx;
+  height: 90rpx;
+  border-radius: 50%;
+  image {
+    width: 100%;
+    height: 100%;
+  }
 }
 </style>

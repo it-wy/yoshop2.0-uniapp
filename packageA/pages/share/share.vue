@@ -3,12 +3,14 @@
 		
 		<view class="card">
 				<view class="shop" v-if="isShop">
-					<scroll-view scroll-x="true" @scroll="scroll"  class="scroll-view_H"  scroll-with-animation="true" >
+					<!-- <scroll-view scroll-x="true" @scroll="scroll"  class="scroll-view_H"  scroll-with-animation="true" >
 						<view class="shop-item"  v-for="(item,i) in shopList" :key="i" :class="{active: idx==i}" @click="getPop(item,i)">
 							{{item.shop_name}}
 						</view>	
-					</scroll-view>
-					<u-icon name="arrow-right" 
+					</scroll-view> -->
+					
+					<view class="shop-item active" >{{shop_name}} {{status==20?'(下架)':'(上架)'}}</view>
+					<u-icon name="arrow-down" @click="onSelect"
 					></u-icon>
 				</view>
 				
@@ -17,7 +19,7 @@
 			</view>
 			<view class="qrcode">
 				<image
-					:src="'data:image/jpeg;base64,'+qrcode"
+					:src="qrcode"
 					mode="aspectFit"
 				/>
 			</view>
@@ -35,6 +37,8 @@
 				<p class="shopp">{{shop_name}}</p>
 			</view>
 		</view>
+
+		<u-select v-model="show" :list="shopList"  @confirm="confirm"></u-select>
 	</view>
 </template>
 
@@ -61,14 +65,16 @@
 					content:''
 				},
 				isShop: false,
-				shopList: ["qq","ww","ee","hhhhhh","汉堡之际","滑稽米苏"],
 				idx: 0,
 				scrollTop: 0,
 				old: {
 					scrollTop: 0
 				},
 				shopList: [],
-				shop_name: ''
+				shop_name: '',
+				show: false,
+				current: {},
+				status: '' // 商铺状态
 			}
 		},
 		methods:{
@@ -76,10 +82,11 @@
 				console.log(e)
 			},
 			getQrcode(){
+				
 				return new Promise((resolve, reject) => {
 						 UserApi.qrCode()
 						 	.then(result => {
-						 		this.qrcode = result.data.str
+						 		this.qrcode = 'https://www.tralife.cn/'+result.data.str
 						 		
 						 	  resolve(result.data)
 						 	})
@@ -103,26 +110,27 @@
 			      })
 			  })		
 			},
-			getPop(item,i){
-				this.idx = i;
+			confirm(e){
 				this.shopList.forEach((i,k)=>{
-					if(this.idx==k){
+					if(e[0].label==i.shop_name){
 						// 筛选
-						this.qrcode = i.QRcode
+						this.qrcode = i.qr_code_url
 						this.avatar = i.shop_url;
 						this.shop_id = i.shop_id;
 						this.shop_name = i.shop_name;
+						this.status = i.status;
 					};
 				})
+			},
+			onSelect(){
+				this.show = true;
 			},
 			scroll(e) {
 				
 				this.old.scrollTop = e.detail.scrollTop
 			},
 			// 根据选中提现
-			onWith(){
-
-			},
+			onWith(){},
 			// 获取店铺二维码
 			getShopQrcode(){
 				const app = this;
@@ -130,11 +138,16 @@
 			    ShopApi.qrcode()
 			      .then(res => {
 			        this.shopList = res.data.list;
-
-					this.qrcode = this.shopList[0].QRcode;
+					this.shopList.forEach((i)=>{
+							i.qr_code_url = 'https://www.tralife.cn/'+i.qr_code_url;
+							i.label = i.shop_name;
+							i.value = i.shop_id;
+					})
+					this.qrcode = this.shopList[0].qr_code_url;
 					
 					this.avatar = this.shopList[0].shop_url;
 					this.shop_name = this.shopList[0].shop_name;
+					this.status = this.shopList[0].status;
 			        resolve(app.userInfo)
 			      })
 			  })		
@@ -279,4 +292,13 @@
 		border-bottom: 6rpx solid #f50;
 		font-weight: bold;
 	}
+	.shop-item {
+						display: inline-block;
+						width: 100%;
+						
+						padding: 20rpx 10rpx;
+						box-sizing: border-box;
+						text-align: center;
+						margin-right: 20rpx;
+					}
 </style>

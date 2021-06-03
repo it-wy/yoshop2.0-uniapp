@@ -69,8 +69,8 @@
       // 监听v-model
       value(val) {
         // 设置默认选中的值
-        
-		if(this.curRoute=='pages/index/index'){
+       
+		if(this.curRoute=='pages/index/index' || this.curRoute=='packageA/pages/payCommon/payCommon' || this.curRoute=='packageA/pages/paumentUnit/paumentUnit'){
 			this.valueText = val.map(item => item.label)[1]
 			
 		}else {

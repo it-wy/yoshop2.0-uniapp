@@ -9,7 +9,12 @@ const api = {
   info: 'shop/shop_info',
   form: 'shop/shop_add',
   code: 'passport/sendSmsCaptcha',
-  qrcode: 'user/get_user_shop'
+  qrcode: 'user/get_user_shop_new',
+  shopGps: 'shop/getarealocation',
+  shopForm: 'shopApply/shopApplyList',
+  formInfo: 'shopApply/shop_info',
+  editForm: 'shopApply/editShopApplyHistory',
+  record: 'shop/shopRecord'
 }
 
 // 本地生活列表
@@ -56,3 +61,29 @@ export const code = (param, option) => {
 export const qrcode = (param, option) => {
   return request.post(api.qrcode, param)
 }
+
+// 商铺入驻定位
+export const shopGps = (param, option) => {
+  return request.post(api.shopGps, param)
+}
+
+// 商铺入驻列表
+export const shopForm = (param, option) => {
+  return request.post(api.shopForm, param)
+}
+
+// 商铺入驻编辑详情
+export const formInfo = (param, option) => {
+  return request.post(api.formInfo, param)
+}
+
+// 商铺入驻编辑
+export const editForm = (param, option) => {
+  return request.post(api.editForm, param)
+}
+
+// 商铺分账提交
+export const record = (param, option) => {
+  return request.post(api.record, param)
+}
+

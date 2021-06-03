@@ -27,18 +27,8 @@
 	export default {
 		data() {
 			return {
-				 list: [ //要展示的数据
+				list: [ //要展示的数据
 					'全部',
-					'餐饮美食',
-					'健康养生',
-					'教育培训',
-					'美容美发',
-					'汽车服务',
-					'休闲娱乐',
-					'婚纱摄影',
-					'水果生鲜',
-					'旅游住宿',
-					'亲子乐园',
 				],
 				initValue: '全部',
 				shoplist: [],
@@ -52,6 +42,7 @@
 					lat: '',
 					lng: '',
 				},
+				default:[]
 			}
 		},
 		components:{
@@ -110,45 +101,16 @@
 			// 根据不同店铺
 			getShopId(v){
 				const app = this;
-				switch (v) {
-				       case '餐饮美食':
-				         app.form.type_id = 10001
-				         break;
-						case '健康养生':
-						 app.form.type_id = 10002 
-						  break;
-						case '教育培训':
-						 app.form.type_id = 10003  
-						  break;
-						case '美容美发':
-						  app.form.type_id = 10004
-						  break;
-						case '汽车服务':
-						  app.form.type_id = 10005
-						  break;
-						case '休闲娱乐':
-						  app.form.type_id = 10006
-						  break;
-						case '婚纱摄影':
-						  app.form.type_id = 10007
-						  break;
-						case '水果生鲜':
-						  app.form.type_id = 10008
-						  break;
-						case '旅游住宿':
-						  app.form.type_id = 10009
-						  break;
-						case '亲子乐园':
-						  app.form.type_id = 10010
-						  break;
-						// case '亲子乐园':
-						//   app.form.type_id = 10011
-						//   break;					
-					 
-					default:
-					app.form.type_id = 0
-					  break;
-				 }
+				
+				app.default.some((i)=>{
+					if (i.text == v) {
+						
+						app.form.type_id = i.shopId;
+						return true;
+					}else {
+						app.form.type_id = 0
+					}
+				})
 			}
 		},
 		onUnload(){
@@ -156,14 +118,15 @@
 			// 	delta:1,
 			// })
 			// uni.redirectTo({ url: '/pages/custom/index?pageId=10002' })
-			/* #ifdef MP-WEIXIN */
+			
+			/* #ifdef MP-WEIXIN || H5 */
 			uni.navigateBack({
 				delta:1,
 			})
 			/* #endif */
 		},
 		onBackPress({from}){
-			/* #ifdef APP-PLUS */
+			/* #ifdef APP-PLUS*/
 			if(from=='navigateBack'){
 				return false
 			}else {
@@ -171,17 +134,16 @@
 					delta:1,
 				})
 			}
-			/* #endif */
-			
-			
+			/* #endif */	
 		},
 		onLoad(options) {
 			const app = this;
 			app.initValue = options.id
+			app.form.type_id = Number(options.shopId)
 			
 			// app.getShopId();
 			// 根据id
-			app.getShopId(app.initValue)
+			// app.getShopId(app.initValue)
 			uni.getStorage({
 				key: 'gps',
 				success: function (res) {
@@ -192,6 +154,19 @@
 					app.getShopList();
 				}
 			});
+
+			uni.getStorage({
+				key: 'shopList',
+				success: function ({data}) {
+					const shop = [];
+					app.default = data;
+					data.map((i)=>{
+						shop.push(i.text);
+					})
+					app.list = [...app.list, ...shop]
+					
+				}
+			})
 			
 		},
 		onReachBottom() {
@@ -207,5 +182,10 @@
 		padding: 10rpx;
 		box-sizing: border-box;
 	}
+	
+</style>
+
+<style>
+
 
 </style>

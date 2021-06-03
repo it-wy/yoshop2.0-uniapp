@@ -3,16 +3,21 @@
 		
 	
 	<view class="container">
+		<!-- #ifdef APP-PLUS || MP-WEIXIN -->
 		<u-sticky>
+		<!-- #endif -->
+		
 		<view style="width: 100%;background-color: #fff;">
 			<view style="width: 400rpx;margin: 0 auto;">
 				<u-tabs :list="list" :is-scroll="false" :current="current" @change="change"></u-tabs>
 			</view>
 		</view>
-		
+		<!-- #ifdef APP-PLUS || MP-WEIXIN -->
 		</u-sticky>
+		<!-- #endif -->
+		
 		<!-- 轮播 -->
-		<u-swiper :list="lists" height="600"></u-swiper>
+		<u-swiper :list="lists" height="650" img-mode="widthFix" border-radius="0"></u-swiper>
 		<!-- 介绍 -->
 		<view class="desc">
 			<p>{{shopInfo.shop_name}}</p>
@@ -176,22 +181,37 @@
 			this.shop_id = options.id
 			// 店铺详情
 			this.fetchShopInfo()
-		}
+		},
+		// 分享
+		onShareAppMessage() {
+			const app = this
+			// 构建页面参数
+			// const params ={
+			// 	id: app.shop_id,
+			// }
+			
+			return {
+				title: app.shopInfo.shop_name,
+				path: `packageA/pages/shopDesc/shopDesc?id=`+app.shop_id
+			}
+		},
+
 	}
 </script>
 
 <style lang="scss" scoped>
 	.wrap {
-		background-color: #fffefe;
-		padding-bottom: 122rpx;
+		background-color: #fafafa;
+		padding-bottom: 102rpx;
 		width: 100%;
 .container{
 	background-color: #fff;
 	.desc {
 		padding: 10rpx 10rpx 15rpx 10rpx;
 		box-sizing: border-box;
-		box-shadow: 0 8rpx 10rpx rgba(0,0,0,.1);
-		border-bottom: 2rpx solid #E4E7ED;
+		// box-shadow: 0 8rpx 10rpx rgba(0,0,0,.1);
+		// border-bottom: 2rpx solid #E4E7ED;
+		margin-bottom: 20rpx;
 		p {
 			&:first-child{
 				font-weight: bold;

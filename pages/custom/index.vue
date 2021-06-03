@@ -46,52 +46,52 @@
 	      break;
 		case '10003':
 		  uni.navigateTo({
-		  	url:'/packageA/pages/lifeList?id='+'餐饮美食'
+		  	url:'/packageA/pages/lifeList?id='+this.options.title+'&shopId='+10001
 		  })
 		  break;
 		case '10004':
 		  uni.navigateTo({
-		  	url:'/packageA/pages/lifeList?id='+'健康养生'
+		  	url:'/packageA/pages/lifeList?id='+this.options.title+'&shopId='+10002
 		  })
 		  break;
 		case '10005':
 		  uni.navigateTo({
-		  	url:'/packageA/pages/lifeList?id='+'教育培训'
+		  	url:'/packageA/pages/lifeList?id='+this.options.title+'&shopId='+10003
 		  })
 		  break;
 		case '10006':
 		  uni.navigateTo({
-		  	url:'/packageA/pages/lifeList?id='+'美容美发'
+		  	url:'/packageA/pages/lifeList?id='+this.options.title+'&shopId='+10004
 		  })
 		  break;
 		case '10007':
 		  uni.navigateTo({
-		  	url:'/packageA/pages/lifeList?id='+'汽车服务'
+		  	url:'/packageA/pages/lifeList?id='+this.options.title+'&shopId='+10005
 		  })
 		  break;
 		case '10008':
 		  uni.navigateTo({
-		  	url:'/packageA/pages/lifeList?id='+'休闲娱乐'
+		  	url:'/packageA/pages/lifeList?id='+this.options.title+'&shopId='+10006
 		  })
 		  break;
 		case '10009':
 		  uni.navigateTo({
-		  	url:'/packageA/pages/lifeList?id='+'婚纱摄影'
+		  	url:'/packageA/pages/lifeList?id='+this.options.title+'&shopId='+10007
 		  })
 		  break;
 		case '10010':
 		  uni.navigateTo({
-		  	url:'/packageA/pages/lifeList?id='+'水果生鲜'
+		  	url:'/packageA/pages/lifeList?id='+this.options.title+'&shopId='+10008
 		  })
 		  break;
 		case '10011':
 		  uni.navigateTo({
-		  	url:'/packageA/pages/lifeList?id='+'旅游住宿'
+		  	url:'/packageA/pages/lifeList?id='+this.options.title+'&shopId='+10009
 		  })
 		  break;
 		case '10012':
 		  uni.navigateTo({
-		  	url:'/packageA/pages/lifeList?id='+'亲子乐园'
+		  	url:'/packageA/pages/lifeList?id='+this.options.title+'&shopId='+10010
 		  })
 		  break;
     case '10014':
@@ -131,6 +131,20 @@
             const { data: { pageData } } = result
             app.page = pageData.page
             app.items = pageData.items
+            app.items.map((item) =>{
+              
+              if(item.name == '导航组'){
+                item.data.map((v,k) =>{ 
+                  v.shopId = 10000+(k+1)
+                })
+                
+                uni.setStorage({
+                  key: 'shopList',
+                  data: item.data,
+                })
+              }
+              
+            })
             // 设置顶部导航栏栏
             app.setPageBar();
           })

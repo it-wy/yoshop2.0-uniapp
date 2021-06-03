@@ -229,6 +229,7 @@
 		onReady() {
 			this.$refs.cukeyboard.open();
 		},
+		
 		// 获取店铺id和是否达人购买
 		onLoad(options) {
 			
