@@ -10,8 +10,11 @@
 					<p>{{item.shop_name}}</p>
 					<p>营业时间  {{item.start_time}} - {{item.end_time}}</p>
 					<p>
-						<u-tag :text="item.tag" mode="light"  class="autotag" />
-						<text>{{item.view_num}}人访问</text>
+							
+					<u-tag v-if="item.distance" :text="item.distance > 1 ? item.distance.toFixed(2)+'公里':(item.distance*1000).toFixed(2)+'米'" mode="light"  class="autotag" />
+					<u-tag v-else :text="item.shop_name" mode="light"  class="autotag" />
+
+					<text>{{item.view_num}}人访问</text>
 					</p>
 					<p>{{item.address}}</p>
 				</div>

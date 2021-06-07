@@ -659,18 +659,6 @@ export default {
         }, 1000);
       }
     },
-    beforeUpload(index, list) {
-      console.log(list);
-      // 只上传偶数索引的文件
-      if (index % 2 == 0) return true;
-      else return false;
-    },
-    beforeUploadLogo(index, list) {
-      console.log(list);
-      // 只上传偶数索引的文件
-      if (index % 2 == 0) return true;
-      else return false;
-    },
     // 时间
     confirmtime(e) {
       this.form.start_time = e.hour + ":" + e.minute + ":" + e.second;

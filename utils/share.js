@@ -1,8 +1,9 @@
 import store from '@/store'
 /* #ifdef H5 */
 import jweixin from './jweixin'
-import * as UserApi from '@/api/user'
+
 /* #endif */
+import * as UserApi from '@/api/user'
 export default{
     data(){
         return {
@@ -71,6 +72,29 @@ export default{
 
 
             
+        },
+        shareCreat(){
+            if(store.getters.userId){
+                uni.getStorage({
+                    key: "res_id",
+                    success: ({ data }) => {
+                      
+                      return new Promise((resolve, reject) => {
+                        UserApi.userShare({ res_id: data })
+                          .then((result) => {
+                            uni.removeStorageSync("res_id");
+                            
+                            resolve(result);
+                          })
+                          .catch((err) => {
+                            reject(err)
+                          });
+                      });
+                    },
+                    fail: (res) => {
+                    },
+                  });
+            }
         }
     },
     onLoad(options) {
@@ -79,24 +103,31 @@ export default{
             this.onH5Share();
         },300)
         /* #endif */
+        
 
-        if(options && options.refereeId){
+
+        if(options && options.refereeId!=undefined || options.scene!=undefined){
             uni.setStorage({
                 key: 'res_id',
-                data: decodeURIComponent(options.refereeId),
+                data: options.refereeId ?  decodeURIComponent(options.refereeId): decodeURIComponent(options.scene),
                 success: res=> {
                     
                 }
             })
               
         }
+
+        setTimeout(() =>{
+            this.shareCreat()    
+        },300)
+       
         
 
     },
     /* #ifdef MP-WEIXIN || APP-PLUS */
     onShareAppMessage(res) {
 		
-		
+		console.log(this.share.path);
         return {
             title:this.share.title,
             path:this.share.path,

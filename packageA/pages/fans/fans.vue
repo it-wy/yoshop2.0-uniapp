@@ -19,7 +19,7 @@
 				</view>
 				
 				<view class="fans-info">
-				<view class="nick-name">昵称: {{item.nick_name}}<text class="level" v-if="item.dr_grade!=0">{{item.dr_grade==0?'':item.dr_grade==1?'城市达人':item.dr_grade==2?'团长':item.dr_grade==3?'县级服务商':item.dr_grade==4?'市级服务商':item.dr_grade==5?'省级服务商': item.dr_grade==6?'运营中心':'达人'}}</text>   <view v-if="item.shop_num_count!=0">{{item.shop_num_count==0?'':'商家'}}</view></view>
+				<view class="nick-name">昵称: {{item.nick_name}}<text class="level" v-if="item.dr_grade!=0">{{item.dr_grade}}</text>   <view v-if="item.shop_num_count!=0">{{item.shop_num_count==0?'':'商家'}}</view></view>
 				<text>UID: {{item.user_id}}</text>
 				</view>
 				

@@ -166,7 +166,10 @@
 						type: 0,
 					},
 					success: ret => {
-						console.log(JSON.stringify(ret));
+						this.$error(JSON.stringify(ret));
+					},
+					fail: ret => {
+						this.$error(JSON.stringify(ret));
 					}
 				});
 				

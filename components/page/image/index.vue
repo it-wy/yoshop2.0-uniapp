@@ -43,12 +43,10 @@
                   uni.getStorage({
                     key: 'dr_type',
                     success: ({ data }) => {
-                      console.log(data);
-                      if(data == 'app'){
-                        this.$navTo('packageA/pages/gift/gift', { sku: 2 });
-                      }else if(data == '!app'){
-                        this.$navTo('packageA/pages/gift/gift', { sku: 1 });
-                      } 
+                      
+                      
+                      this.$navTo('packageA/pages/gift/gift', { sku: data });
+                      
                     },
                     fail: (error) => {}
                   })

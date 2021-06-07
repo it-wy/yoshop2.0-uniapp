@@ -80,7 +80,7 @@ export default {
                 // uni.switchTab({ url: '/pages/user/index' })
                 }, 2000);
               },
-            });;
+            });
           })
           .catch(() => {});
       }

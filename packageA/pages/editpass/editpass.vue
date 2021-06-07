@@ -34,7 +34,7 @@
 					<u-button slot="right" :disabled="disabled2" @click="getCode2">发送验证码</u-button>
 				</u-form-item>
 			</u-form>
-    <u-button @click="submit">修改</u-button>
+    <u-button @click="submit" type="primary">修改</u-button>
   </view>
 </template>
 

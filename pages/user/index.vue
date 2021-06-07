@@ -58,7 +58,7 @@
           <!-- 城市达人 -->
           <view class="user_vip">
             <!-- <u-tag :text="vip" border-color="#c59a46" color="white" bg-color="#ff5722e0"  mode="dack" /> -->
-            <view class="vip">{{ vip }}</view>
+            <view class="vip" v-if="userInfo.dr_gradeName!=''">{{ userInfo.dr_gradeName }}</view>
             &nbsp;{{ userInfo.shop_id_arr.length > 0 ? "[商家]" : "" }}
           </view>
         </view>
@@ -463,10 +463,7 @@ export default {
     setCartTabBadge();
     // 判断是否已登录
     this.isLogin = checkLogin();
-    uni.setStorage({
-      key: 'dr_type',
-      data: '!app',
-    })
+    
      this.service = [
             {
               id: "address",
@@ -808,10 +805,8 @@ export default {
     handleService({ url, id }) {
       if (url == "packageA/pages/with/with") {
         this.$navTo(url, { type: "phone" });
-      }else if(id == 'app'){
-        this.$navTo(url, { sku: 2 });
-      }else if(id == '!app'){
-        this.$navTo(url, { sku: 1 });
+      }else if(this.userInfo.sku){
+        this.$navTo(url, {sku: this.userInfo.sku});
       } else {
         this.$navTo(url);
       }
@@ -939,19 +934,24 @@ export default {
         app.$forceUpdate();
       }
       
+      uni.setStorage({
+      key: 'dr_type',
+      data: app.userInfo.sku,
+    })
       if(app.userInfo.res_table!=null){
-        if(app.userInfo.res_table.includes('100278')){
-        app.service.forEach((i) => {
-          if(i.id == '!app'){
-            i.id = 'app';
-            uni.setStorage({
-              key: 'dr_type',
-              data: i.id,
-            })
-          } 
-        });
-        app.$forceUpdate();
-      }
+
+        // if(app.userInfo.res_table.includes('100278')){
+        // app.service.forEach((i) => {
+        //   if(i.id == '!app'){
+        //     i.id = 'app';
+        //     uni.setStorage({
+        //       key: 'dr_type',
+        //       data: i.id,
+        //     })
+        //   } 
+        // });
+      //   app.$forceUpdate();
+      // }
       }
       
 
@@ -1048,7 +1048,7 @@ export default {
       margin-left: 30rpx;
       color: #c59a46;
       flex: 1;
-
+      
       .nick-name {
         font-size: 32rpx;
         font-weight: bold;
