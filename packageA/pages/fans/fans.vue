@@ -80,6 +80,7 @@
 		onLoad() {
 			this.getfans();
 		},
+		// 下拉
 		onReachBottom() {
 			this.page++;
 			this.getfans();
